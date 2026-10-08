@@ -38,7 +38,7 @@ class AuthController {
                         if($user->admin) {
                             header('Location: /admin/dashboard');
                         } else {
-                            header('Location: /finish-registration');
+                            header('Location: /purchase');
                         }
                         
                     } else {
@@ -64,6 +64,36 @@ class AuthController {
             header('Location: /');
         }
        
+    }
+
+    public static function deregister() {
+        if($_SERVER['REQUEST_METHOD'] !== 'POST' || !is_auth()) {
+            header('Location: /');
+            return;
+        }
+
+        $records = \Model\Record::whereArray(['user_id' => $_SESSION['id']]);
+
+        foreach($records as $record) {
+            $registries = \Model\EventsRegistry::whereArray(['record_id' => $record->id]);
+
+            foreach($registries as $registry) {
+                $registry->delete();
+            }
+
+            $record->delete();
+        }
+
+        $user = User::find($_SESSION['id']);
+
+        if($user) {
+            $user->delete();
+        }
+
+        $_SESSION = [];
+        session_destroy();
+
+        header('Location: /');
     }
 
     public static function record(Router $router) {

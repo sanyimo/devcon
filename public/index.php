@@ -24,8 +24,8 @@ $router->post('/login', [AuthController::class, 'login']);
 $router->post('/logout', [AuthController::class, 'logout']);
 
 // Create account
-$router->get('/record', [AuthController::class, 'record']);
-$router->post('/record', [AuthController::class, 'record']);
+$router->get('/register', [AuthController::class, 'record']);
+$router->post('/register', [AuthController::class, 'record']);
 
 // Forgot password form
 $router->get('/forgot', [AuthController::class, 'forgot']);
@@ -72,11 +72,16 @@ $router->post('/admin/gifts/edit', [GiftsController::class, 'edit']);
 $router->post('/admin/gifts/delete', [GiftsController::class, 'delete']);
 
 // User registration
-$router->get('/finish-registration', [RecordController::class, 'create']);
-$router->post('/finish-registration/free', [RecordController::class, 'free']);
-$router->post('/finish-registration/purchase', [RecordController::class, 'purchase']);
-$router->get('/finish-registration/conferences', [RecordController::class, 'conferences']);
-$router->post('/finish-registration/conferences', [RecordController::class, 'conferences']);
+$router->get('/purchase', [RecordController::class, 'create']);
+$router->post('/purchase/free', [RecordController::class, 'free']);
+$router->post('/purchase', [RecordController::class, 'purchase']);
+$router->get('/purchase/conferences', [RecordController::class, 'conferences']);
+$router->post('/purchase/conferences', [RecordController::class, 'conferences']);
+
+// Account management
+$router->get('/manage', [RecordController::class, 'manage']);
+$router->post('/deregister', [AuthController::class, 'deregister']);
+$router->post('/cancel-ticket', [RecordController::class, 'cancel']);
 
 // Virtual ticket
 $router->get('/ticket', [RecordController::class, 'ticket']);

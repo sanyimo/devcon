@@ -21,23 +21,29 @@ class RecordController {
             return;
         }
 
-        // Check whether the user is already registered
-        $record = Record::where('user_id', $_SESSION['id']);
+        if(isset($_GET['view']) && $_GET['view'] === 'ticket') {
+            $record = Record::where('user_id', $_SESSION['id']);
 
-        if(isset($record) && ($record->pack_id === "3" || $record->pack_id === "2" )) {
-            header('Location: /ticket?id=' . urlencode($record->token));
-            return;
-        }
+            if($record) {
+                $record = (object) array_merge((array) $record, [
+                    'user' => User::find($record->user_id),
+                    'pack' => Pack::find($record->pack_id)
+                ]);
 
-        if(isset($record) && $record->pack_id === "1") {
-            header('Location: /finish-registration/conferences');
-            return;
+                $router->render('record/ticket', [
+                    'title' => t('Asistencia a DevCon'),
+                    'record' => $record,
+                    'preview' => true
+                ]);
+                return;
+            }
         }
 
         $router->render('record/create', [
-            'title' => t('Finalizar registro')
+            'title' => t('Tickets & Precios')
         ]);
     }
+
     public static function free(Router $router) {
 
         if($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -73,6 +79,62 @@ class RecordController {
         }
     }
 
+    public static function manage(Router $router) {
+        if(!is_auth()) {
+            header('Location: /login');
+            return;
+        }
+
+        $records = Record::whereArray(['user_id' => $_SESSION['id']]);
+
+        foreach($records as $record) {
+            $record->pack = Pack::find($record->pack_id);
+        }
+
+        $router->render('record/manage', [
+            'title' => t('Administrar'),
+            'records' => $records
+        ]);
+    }
+
+    public static function cancel() {
+        if($_SERVER['REQUEST_METHOD'] !== 'POST' || !is_auth()) {
+            header('Location: /manage');
+            return;
+        }
+
+        $token = $_POST['token'] ?? '';
+
+        if(!$token) {
+            header('Location: /manage');
+            return;
+        }
+
+        $record = Record::where('token', $token);
+
+        if(!$record || (string) $record->user_id !== (string) $_SESSION['id']) {
+            header('Location: /manage');
+            return;
+        }
+
+        $registries = EventsRegistry::whereArray(['record_id' => $record->id]);
+
+        foreach($registries as $registry) {
+            $event = Event::find($registry->event_id);
+
+            if($event) {
+                $event->availables += 1;
+                $event->save();
+            }
+
+            $registry->delete();
+        }
+
+        $record->delete();
+
+        header('Location: /manage');
+    }
+
     public static function ticket(Router $router) {
 
         // Validate the URL
@@ -100,6 +162,7 @@ class RecordController {
             'record' => $record
         ]);
     }
+
     public static function purchase(Router $router) {
 
         if($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -131,6 +194,7 @@ class RecordController {
             }
         }
     }
+
     public static function conferences(Router $router) {
 
         if(!is_auth()) {

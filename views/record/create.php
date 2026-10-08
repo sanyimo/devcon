@@ -11,7 +11,7 @@
 
             <p class="pack__price">0€</p>
 
-            <form method="POST" action="/finish-registration/free">
+            <form method="POST" action="/purchase/free">
                 <input class="packs__submit" type="submit" value="<?php echo t('Inscripción gratuita'); ?>">
             </form>
         </div>
@@ -98,14 +98,14 @@
                     data.append('pack_id', orderData.purchase_units[0].description);
                     data.append('payment_id', orderData.purchase_units[0].payments.captures[0].id);
 
-                    fetch('/finish-registration/purchase', {
+                    fetch('/purchase', {
                             method: 'POST',
                             body: data
                         })
                         .then(response => response.json())
                         .then(result => {
                             if (result.result) {
-                                actions.redirect('http://localhost:3000/finish-registration/conferences');
+                                actions.redirect('http://localhost:3000/purchase/conferences');
                             }
                         })
                 });
@@ -152,19 +152,18 @@
                     data.append('pack_id', orderData.purchase_units[0].description);
                     data.append('pago_id', orderData.purchase_units[0].payments.captures[0].id);
 
-                    fetch('/finish-record/puchase', {
+                    fetch('/purchase', {
                             method: 'POST',
                             body: data
                         })
                         .then(response => response.json())
                         .then(result => {
                             if (result.result) {
-                                actions.redirect('http://localhost:3000/finish-registration/conferences');
+                                actions.redirect('http://localhost:3000/purchase/conferences');
                             }
                         })
                 });
             },
-
             onError: function(err) {
                 console.log(err);
             }

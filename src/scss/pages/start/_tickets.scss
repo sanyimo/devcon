@@ -170,4 +170,34 @@
             top: calc(50% - 2.5rem);
         }
     }
+
+    &__actions {
+        display: flex;
+        flex-direction: column;
+        justify-items: center;
+        gap: 1rem;
+        margin-top: 3rem;
+
+        @include m.tablet {
+            flex-direction: row;
+        }
+
+        .cancel-ticket {
+           @include m.btn(v.$secondary, v.$white);
+
+        }
+
+        .delete_account {
+            @include m.btn(v.$red, v.$white)
+        }
+    }
+}
+
+.manage-ticket {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+
 }

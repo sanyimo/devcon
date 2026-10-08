@@ -14,7 +14,7 @@
         <nav class="header__navigation">
 
             <?php if(is_auth()) { ?>
-                <a href="<?php echo is_admin() ? '/admin/dashboard' : ($record ? '/ticket?id=' . urlencode($record->token) : '/purchase'); ?>" class="header__link"><?php echo t('Administrar'); ?></a>
+                <a href="<?php echo is_admin() ? '/admin/dashboard' : '/manage'; ?>" class="header__link"><?php echo t('Administrar'); ?></a>
                 <form method="POST" action="/logout" class="header__form">
                     <input type="submit" value="<?php echo t('Cerrar sesión'); ?>" class="header__submit">
                 </form>
@@ -55,7 +55,25 @@
             <a href="/devcon" class="navigation__link <?php echo current_page('/devcon') ? 'navigation__link--current' : ''; ?>"><?php echo t('Evento'); ?></a>
             <a href="/packs" class="navigation__link <?php echo current_page('/packs') ? 'navigation__link--current' : ''; ?>"><?php echo t('Paquetes'); ?></a>
             <a href="/workshops-conferences" class="navigation__link <?php echo current_page('/workshops-conferences') ? 'navigation__link--current' : ''; ?>"><?php echo t('Workshops / Conferencias'); ?></a>
-            <a href="<?php echo is_auth() ? '/purchase' : '/register'; ?>" class="navigation__link <?php echo current_page('/purchase') ? 'navigation__link--current' : ''; ?>"><?php echo t('Entradas'); ?></a>
+            <a href="<?php echo is_auth() ? '/purchase' : '/register'; ?>" class="navigation__link <?php echo current_page('/purchase') ? 'navigation__link--current' : ''; ?>" data-ticket-token="<?php echo $record?->token ?? ''; ?>"><?php echo t('Entradas'); ?></a>
         </nav>
     </div>
 </div>
+
+<?php if(is_auth() && !is_admin() && $record) { ?>
+<script>
+    const ticketsLink = document.querySelector('[data-ticket-token]');
+
+    if(ticketsLink) {
+        ticketsLink.addEventListener('click', function(event) {
+            const previewKey = 'devcon-ticket-preview-' + this.dataset.ticketToken;
+
+            if(!sessionStorage.getItem(previewKey)) {
+                event.preventDefault();
+                sessionStorage.setItem(previewKey, '1');
+                window.location.href = '/purchase?view=ticket';
+            }
+        });
+    }
+</script>
+<?php } ?>

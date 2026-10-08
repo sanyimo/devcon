@@ -15,7 +15,9 @@ $qrCode = QRGenerator::generate($qrData);
 
 <main class="pagina">
     <h2 class="page__heading"><?php echo $title ?? t('Ticket de entrada'); ?></h2>
-    <p class="page__description"><?php echo t('Aquí tienes tu ticket de entrada.'); ?> <br> <?php echo t('Lo puedes localizar fácilmente pulsando la pestaña'); ?> <strong>"<?php echo t('Administrar'); ?>"</strong> <?php echo t('de arriba.'); ?></p>
+    <?php if($preview ?? false) { ?>
+        <p class="page__description"><?php echo t('Aquí tienes tu ticket de entrada.'); ?> <br> <?php echo t('Lo puedes localizar fácilmente pulsando la pestaña'); ?> <strong>"<?php echo t('Administrar'); ?>"</strong> <?php echo t('de arriba.'); ?></p>
+    <?php } ?>
 
     <div class="ticket-virtual">
 
@@ -32,3 +34,21 @@ $qrCode = QRGenerator::generate($qrData);
         </div>
     </div>
 </main>
+
+<?php if($preview ?? false) { ?>
+<script>
+    const navigation = performance.getEntriesByType('navigation')[0];
+
+    if(navigation?.type === 'reload') {
+        window.location.replace('/purchase');
+    }
+
+    window.history.replaceState(null, '', '/purchase');
+
+    window.addEventListener('pageshow', function(event) {
+        if(event.persisted) {
+            window.location.replace('/purchase');
+        }
+    });
+</script>
+<?php } ?>
