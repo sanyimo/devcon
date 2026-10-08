@@ -1,13 +1,13 @@
-<h2 class="dashboard__heading"><?php echo $title ?? 'Registros'; ?></h2>
+<h2 class="dashboard__heading"><?php echo t($title ?? 'Registros'); ?></h2>
 
 <div class="dashboard__container">
     <?php if(!empty($records)) { ?>
         <table class="table">
             <thead class="table__thead">
                 <tr>
-                    <th scope="col" class="table__th">Nombre</th>
-                    <th scope="col" class="table__th">E-mail</th>
-                    <th scope="col" class="table__th">Plan</th>
+                    <th scope="col" class="table__th"><?php echo t('Nombre'); ?></th>
+                    <th scope="col" class="table__th"><?php echo t('E-mail'); ?></th>
+                    <th scope="col" class="table__th"><?php echo t('Plan'); ?></th>
                 </tr>
             </thead>
 
@@ -29,7 +29,7 @@
             </tbody>
         </table>
     <?php } else { ?>
-        <p class="text-center">No hay registros aún</p>
+        <p class="text-center"><?php echo t('No hay registros aún'); ?></p>
     <?php } ?>
 </div>
 

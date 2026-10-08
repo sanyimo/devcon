@@ -26,28 +26,28 @@ class Event extends ActiveRecord {
         $this->speaker_id = $args['speaker_id'] ?? '';
     }
 
-    // Mensajes de validación para la creación de un evento
+    // Validation messages for event creation
     public function validate() {
         if(!$this->name) {
-            self::$alerts['error'][] = 'El nombre es obligatorio';
+            self::$alerts['error'][] = t('El nombre es obligatorio');
         }
         if(!$this->description) {
-            self::$alerts['error'][] = 'La descripción es obligatoria';
+            self::$alerts['error'][] = t('La descripción es obligatoria');
         }
         if(!$this->category_id  || !filter_var($this->category_id, FILTER_VALIDATE_INT)) {
-            self::$alerts['error'][] = 'Elige una categoría';
+            self::$alerts['error'][] = t('Elige una categoría');
         }
         if(!$this->day_id  || !filter_var($this->day_id, FILTER_VALIDATE_INT)) {
-            self::$alerts['error'][] = 'Elige el día del evento';
+            self::$alerts['error'][] = t('Elige el día del evento');
         }
         if(!$this->hour_id  || !filter_var($this->hour_id, FILTER_VALIDATE_INT)) {
-            self::$alerts['error'][] = 'Elige la hora del evento';
+            self::$alerts['error'][] = t('Elige la hora del evento');
         }
         if(!$this->availables  || !filter_var($this->availables, FILTER_VALIDATE_INT)) {
-            self::$alerts['error'][] = 'Añade una cantidad de cupos disponibles';
+            self::$alerts['error'][] = t('Añade una cantidad de cupos disponibles');
         }
         if(!$this->speaker_id || !filter_var($this->speaker_id, FILTER_VALIDATE_INT) ) {
-            self::$alerts['error'][] = 'Selecciona la persona encargada del evento';
+            self::$alerts['error'][] = t('Selecciona la persona encargada del evento');
         }
 
         return self::$alerts;

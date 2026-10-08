@@ -19,7 +19,7 @@ class APIEvents {
            return;
         }
 
-        // Consultar la base de datos
+        // Query the database
         $events = EventSchedule::whereArray(['day_id' => $day_id, 'category_id' => $category_id]) ?? [];
         echo json_encode($events);
     }

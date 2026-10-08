@@ -35,7 +35,7 @@ class SpeakersController {
         $speakers = Speaker::paginate($records_per_page, $pagination->offset());
 
         $router->render('admin/speakers/index', [
-            'title' => 'Ponentes / Conferenciantes',
+            'title' => t('Ponentes / Conferenciantes'),
             'speakers' => $speakers,
             'pagination' => $pagination->pagination()
         ]);
@@ -54,10 +54,10 @@ class SpeakersController {
                 header('Location: /login');
             }
             $image_name = null;
-            // Read image
+            // Read the image
             if(!empty($_FILES['image']['tmp_name'])) {
                 
-                // Crear la carpeta si no existe
+                // Create the folder if it does not exist
                 if(!is_dir($images_folder)) {
                     mkdir($images_folder, 0755, true);
                 }
@@ -69,14 +69,14 @@ class SpeakersController {
                 $_POST['image'] = $image_name;
             } 
 
-            $_POST['social_networks'] = json_encode( $_POST['social_networks'], JSON_UNESCAPED_SLASHES );//llega como un string y no como arreglo
+            $_POST['social_networks'] = json_encode( $_POST['social_networks'], JSON_UNESCAPED_SLASHES );// arrives as a string, not an array
 
             $speaker->syncronize($_POST);
 
-            // validar
+            // Validate
             $alerts = $speaker->validate();
 
-             // Guardar el registro
+             // Save the record
              if(empty($alerts)) {
 
                 // Save images
@@ -85,14 +85,14 @@ class SpeakersController {
                     $image_webp->save($images_folder . '/' . $image_name . ".webp" );
                 }
 
-                // Guardar en la BD
+                // Save to the database
                 $speaker->save();
                 header('Location: /admin/speakers');
              }
         }
         
         $router->render('admin/speakers/create', [
-            'title' => 'Registrar ponente',
+            'title' => t('Registrar ponente'),
             'aleras' => $alerts,
             'speaker' => $speaker,
             'social_networks' => json_decode($speaker->social_networks)
@@ -105,7 +105,7 @@ class SpeakersController {
         }
         $alerts = [];
         $images_folder = '../public/img/speakers';
-        // Validar el ID
+        // Validate the ID
         $id = $_GET['id'];
         $id = filter_var($id, FILTER_VALIDATE_INT);
 
@@ -113,7 +113,7 @@ class SpeakersController {
             header('Location: /admin/speakers');
         }
 
-        // Obtener ponente a Editar
+        // Get the speaker to edit
         $speaker = Speaker::find($id);
 
         if(!$speaker) {
@@ -125,10 +125,10 @@ class SpeakersController {
             if(!is_admin()) {
                 header('Location: /login');
             }
-            // Read image
+            // Read the image
             if(!empty($_FILES['image']['tmp_name'])) {
                 
-                // Crear la carpeta si no existe
+                // Create the folder if it does not exist
                 if(!is_dir($images_folder)) {
                     mkdir($images_folder, 0755, true);
                 }
@@ -159,7 +159,7 @@ class SpeakersController {
         }
 
         $router->render('admin/speakers/edit', [
-            'title' => 'Actualizar ponente',
+            'title' => t('Actualizar ponente'),
             'alerts' => $alerts,
             'speaker' => $speaker,
             'social_networks' => json_decode($speaker->social_networks)

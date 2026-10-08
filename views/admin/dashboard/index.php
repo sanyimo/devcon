@@ -1,9 +1,9 @@
-<h2 class="dashboard__heading"><?php echo $title ?? ''; ?></h2>
+<h2 class="dashboard__heading"><?php echo t($title ?? ''); ?></h2>
 
 <main class="blocks">
     <div class="blocks__grid">
         <div class="block">
-            <h3 class="block__heading">Últimos registros</h3>
+            <h3 class="block__heading"><?php echo t('Últimos registros'); ?></h3>
 
             <?php foreach(($records ?? []) as $record) { ?>
                 <div class="block__content">
@@ -20,27 +20,27 @@
         </div>
 
         <div class="block">
-            <h3 class="block__heading">Ingresos</h3>
+            <h3 class="block__heading"><?php echo t('Ingresos'); ?></h3>
             <p class="block__text--quantity"><?php echo $income ?? 0; ?> €</p>
         </div>
 
         <div class="block">
-            <h3 class="block__heading">Eventos con menos cupos disponibles</h3>
+            <h3 class="block__heading"><?php echo t('Eventos con menos cupos disponibles'); ?></h3>
             <?php foreach(($less_availables ?? []) as $event) { ?>
                 <div class="block__content">
                     <p class="block__text">
-                        <?php if (is_object($event)) { echo htmlspecialchars($event->name ?? '', ENT_QUOTES, 'UTF-8') . ' - <strong>' . htmlspecialchars((string) ($event->availables ?? ''), ENT_QUOTES, 'UTF-8') . ' Disponibles</strong>'; } ?>
+                        <?php if (is_object($event)) { echo htmlspecialchars($event->name ?? '', ENT_QUOTES, 'UTF-8') . ' - <strong>' . htmlspecialchars((string) ($event->availables ?? ''), ENT_QUOTES, 'UTF-8') . ' ' . t('Disponibles') . '</strong>'; } ?>
                     </p>
                 </div>
             <?php } ?>
         </div>
 
         <div class="block">
-            <h3 class="block__heading">Eventos con más cupos disponibles</h3>
+            <h3 class="block__heading"><?php echo t('Eventos con más cupos disponibles'); ?></h3>
             <?php foreach(($more_availables ?? []) as $event) { ?>
                 <div class="block__content">
                     <p class="block__text">
-                        <?php if (is_object($event)) { echo htmlspecialchars($event->name ?? '', ENT_QUOTES, 'UTF-8') . ' - <strong>' . htmlspecialchars((string) ($event->availables ?? ''), ENT_QUOTES, 'UTF-8') . ' Disponibles</strong>'; } ?>
+                        <?php if (is_object($event)) { echo htmlspecialchars($event->name ?? '', ENT_QUOTES, 'UTF-8') . ' - <strong>' . htmlspecialchars((string) ($event->availables ?? ''), ENT_QUOTES, 'UTF-8') . ' ' . t('Disponibles') . '</strong>'; } ?>
                     </p>
                 </div>
             <?php } ?>

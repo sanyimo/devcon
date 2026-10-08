@@ -38,7 +38,7 @@ class RecordedController {
         }
 
         $router->render('admin/recorded/index', [
-            'title' => 'Usuarios registrados',
+            'title' => t('Usuarios registrados'),
             'records' => $records,
             'pagination' => $pagination->pagination()
         ]);

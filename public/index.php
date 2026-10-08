@@ -23,23 +23,23 @@ $router->get('/login', [AuthController::class, 'login']);
 $router->post('/login', [AuthController::class, 'login']);
 $router->post('/logout', [AuthController::class, 'logout']);
 
-// Crear Cuenta
+// Create account
 $router->get('/record', [AuthController::class, 'record']);
 $router->post('/record', [AuthController::class, 'record']);
 
-// form de olvide mi password
+// Forgot password form
 $router->get('/forgot', [AuthController::class, 'forgot']);
 $router->post('/forgot', [AuthController::class, 'forgot']);
 
-// Colocar el nuevo password
+// Set new password
 $router->get('/restore', [AuthController::class, 'restore']);
 $router->post('/restore', [AuthController::class, 'restore']);
 
-// Confirmación de Cuenta
+// Account confirmation
 $router->get('/message', [AuthController::class, 'message']);
 $router->get('/confirm-account', [AuthController::class, 'confirm']);
 
-// Area de administración
+// Admin area
 $router->get('/admin/dashboard', [DashboardController::class, 'index']);
 
 $router->get('/admin/speakers', [SpeakersController::class, 'index']);
@@ -71,17 +71,17 @@ $router->get('/admin/gifts/edit', [GiftsController::class, 'edit']);
 $router->post('/admin/gifts/edit', [GiftsController::class, 'edit']);
 $router->post('/admin/gifts/delete', [GiftsController::class, 'delete']);
 
-// Registro de Usuarios
+// User registration
 $router->get('/finish-record', [RecordController::class, 'create']);
 $router->post('/finish-record/free', [RecordController::class, 'free']);
 $router->post('/finish-record/purchase', [RecordController::class, 'purchase']);
 $router->get('/finish-record/conferences', [RecordController::class, 'conferences']);
 $router->post('/finish-record/conferences', [RecordController::class, 'conferences']);
 
-// virtual ticket
+// Virtual ticket
 $router->get('/ticket', [RecordController::class, 'ticket']);
 
-// Área pública
+// Public area
 $router->get('/', [PagesController::class, 'index']);
 $router->get('/devcon', [PagesController::class, 'event']);
 $router->get('/packs', [PagesController::class, 'packs']);

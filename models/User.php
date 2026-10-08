@@ -19,51 +19,51 @@ class User extends ActiveRecord {
         $this->admin = $args['admin'] ?? 0;
     }
 
-    // Validar el Login de Usuarios
+    // Validate user login
     public function validateLogin() {
         if(!$this->email) {
-            self::$alerts['error'][] = 'El e-mail del usuario es obligatorio';
+            self::$alerts['error'][] = t('El e-mail del usuario es obligatorio');
         }
         if(!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
-            self::$alerts['error'][] = 'E-mail no válido';
+            self::$alerts['error'][] = t('E-mail no válido');
         }
         if(!$this->password) {
-            self::$alerts['error'][] = 'El campo &laquo;Contraseña&raquo; no puede ir vacío';
+            self::$alerts['error'][] = t('El campo &laquo;Contraseña&raquo; no puede ir vacío');
         }
         return self::$alerts;
 
     }
 
-    // Validación para cuentas nuevas
+    // Validate new accounts
     public function validate_account() {
         if(!$this->name) {
-            self::$alerts['error'][] = 'El nombre es obligatorio';
+            self::$alerts['error'][] = t('El nombre es obligatorio');
         }
         if(!$this->surname) {
-            self::$alerts['error'][] = 'El apellido es obligatorio';
+            self::$alerts['error'][] = t('El apellido es obligatorio');
         }
         if(!$this->email) {
-            self::$alerts['error'][] = 'El e-mail es obligatorio';
+            self::$alerts['error'][] = t('El e-mail es obligatorio');
         }
         if(!$this->password) {
-            self::$alerts['error'][] = 'El campo &laquo;Contraseña&raquo; no puede ir vacío';
+            self::$alerts['error'][] = t('El campo &laquo;Contraseña&raquo; no puede ir vacío');
         }
         if(strlen($this->password) < 6) {
-            self::$alerts['error'][] = 'La contraseña debe contener al menos 6 caracteres';
+            self::$alerts['error'][] = t('La contraseña debe contener al menos 6 caracteres');
         }
         if($this->password !== $this->password2) {
-            self::$alerts['error'][] = 'Las contraseñas no coinciden';
+            self::$alerts['error'][] = t('Las contraseñas no coinciden');
         }
         return self::$alerts;
     }
 
-    // Valida un email
+    // Validate email
     public function validateEmail() {
         if(!$this->email) {
-            self::$alerts['error'][] = 'El e-mail es obligatorio';
+            self::$alerts['error'][] = t('El e-mail es obligatorio');
         }
         if(!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
-            self::$alerts['error'][] = 'E-mail no válido';
+            self::$alerts['error'][] = t('E-mail no válido');
         }
         return self::$alerts;
     }

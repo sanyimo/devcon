@@ -21,7 +21,7 @@ class RecordController {
             return;
         }
 
-        // Verificar si el usuario ya esta registrado
+        // Check whether the user is already registered
         $record = Record::where('user_id', $_SESSION['id']);
 
         if(isset($record) && ($record->pack_id === "3" || $record->pack_id === "2" )) {
@@ -35,7 +35,7 @@ class RecordController {
         }
 
         $router->render('record/create', [
-            'title' => 'Finalizar registro'
+            'title' => t('Finalizar registro')
         ]);
     }
     public static function free(Router $router) {
@@ -46,7 +46,7 @@ class RecordController {
                 return;
             }
 
-            // Verificar si el usuario ya esta registrado
+            // Check whether the user is already registered
             $record = Record::where('user_id', $_SESSION['id']);
             if(isset($record) && $record->pack_id === "3") {
                 header('Location: /ticket?id=' . urlencode($record->token));
@@ -55,7 +55,7 @@ class RecordController {
 
             $token = substr( md5(uniqid( rand(), true )), 0, 8);
 
-            // Crear registro
+            // Create the registration
             $data = [
                 'pack_id' => 3,
                 'payment_id' => '',
@@ -75,7 +75,7 @@ class RecordController {
 
     public static function ticket(Router $router) {
 
-        // Validar la URL
+        // Validate the URL
         $id = $_GET['id'];
 
         if(!$id || !strlen($id) === 8 ) {
@@ -83,20 +83,20 @@ class RecordController {
             return;
         }
 
-        // buscarlo en la BD
+        // Find it in the database
         $record = Record::where('token', $id);
         if(!$record) {
             header('Location: /');
             return;
         }
-        // Llenar las tablas de referencia
+        // Load the related records
         $record = (object) array_merge((array) $record, [
             'user' => User::find($record->user_id),
             'pack' => Pack::find($record->pack_id)
         ]);
 
         $router->render('record/ticket', [
-            'title' => 'Asistencia a DevCon',
+            'title' => t('Asistencia a DevCon'),
             'record' => $record
         ]);
     }
@@ -108,15 +108,15 @@ class RecordController {
                 return;
             }
 
-            // Validar que Post no venga vacio
+            // Validate that POST is not empty
             if(empty($_POST)) {
                 echo json_encode([]);
                 return;
             }
 
-            // Crear el registro
+            // Create the registration
             $data = $_POST;
-            $data['token'] = substr( md5(uniqid( rand(), true )), 0, 8); //inicio y final, 0-8
+            $data['token'] = substr( md5(uniqid( rand(), true )), 0, 8); // Start and end, 0-8
             $data['user_id'] = $_SESSION['id'];
             
             try {
@@ -138,7 +138,7 @@ class RecordController {
             return;
         }        
 
-        // Validar que el usuario tenga el plan presencial
+        // Validate that the user has the in-person plan
         $user_id = $_SESSION['id'];
         $record = Record::where('user_id', $user_id);
 
@@ -152,7 +152,7 @@ class RecordController {
             return;
         }
 
-        // Redireccionar a ticket virtual en caso de haber finalizado su registro
+        // Redirect to the virtual ticket if registration is complete
         // if(isset($record->gift_id) && $record->pack_id === "1") {
         //     header('Location: /ticket?id=' . urlencode($record->token));
         //     return;
@@ -187,10 +187,10 @@ class RecordController {
         }
         $gifts = Gift::all('ASC');
 
-        // Manejando el registro mediante $_POST
+        // Handle registration through $_POST
         if($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-            // Revisar que el usuario este autenticado
+            // Check that the user is authenticated
             if(!is_auth()) {
                 header('Location: /login');
                 return;
@@ -202,7 +202,7 @@ class RecordController {
                 return;
             }
 
-            // Obtener el registro de usuario
+            // Get the user registration
             $record = Record::where('user_id', $_SESSION['id']);
             if(!isset($record) || $record->pack_id !== "1") {
                 echo json_encode(['result' => false]);
@@ -210,22 +210,22 @@ class RecordController {
             }
 
             $events_array = [];
-            //1. Validar la disponibilidad de los events seleccionados
+            // 1. Validate availability for the selected events
             foreach($events as $event_id) {
                 $event = Event::find($event_id);
-                //Check if event exists
+                // Check whether the event exists
                 if(!isset($event) || $event->availables === "0") {
                     echo json_encode(['result' => false]);
                     return;
                 }
                 $events_array[] = $event;
             }
-            //2.restar y guardar
+            // 2. Decrease availability and save
             foreach($events_array as $event) {
                 $event->availables -= 1;
                 $event->save();
 
-                // Almacenar el registro
+                // Store the registration
                 $data = [
                     'event_id' =>  (int) $event->id,
                     'record_id' => (int)  $record->id
@@ -235,7 +235,7 @@ class RecordController {
                 $record_user->save();
             }
 
-            // Almacenar el regalo
+            // Store the gift
             $record->syncronize(['gift_id' => $_POST['gift_id']]);
             $result = $record->save();
 
@@ -251,12 +251,12 @@ class RecordController {
         }
 
         $router->render('record/conferences', [
-            'title' => 'Elige Workshops y Conferencias',
+            'title' => t('Elige Workshops y Conferencias'),
             'events' => $events_formatted,
             'gifts' => $gifts
         ]);
 
-        // Redireccionar a ticket virtual en caso de haber finalizado su registro
+        // Redirect to the virtual ticket if registration is complete
         if(isset($record->gift_id) && $record->pack_id === "1") {
             header('Location: /ticket?id=' . urlencode($record->token));
             return;

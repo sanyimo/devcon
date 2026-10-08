@@ -1,9 +1,9 @@
-<h2 class="dashboard__heading"><?php echo $title ?? 'Eventos'; ?></h2>
+<h2 class="dashboard__heading"><?php echo t($title ?? 'Eventos'); ?></h2>
 
 <div class="dashboard__container-btn
     <a class=" dashboard__btn" href="/admin/events/create">
     <i class="fa-solid fa-circle-plus"></i>
-    Añadir evento
+    <?php echo t('Añadir evento'); ?>
     </a>
 </div>
 
@@ -13,10 +13,10 @@
         <table class="table">
             <thead class="table__thead">
                 <tr>
-                    <th scope="col" class="table__th">Evento</th>
-                    <th scope="col" class="table__th">Categoría</th>
-                    <th scope="col" class="table__th">Día y hora</th>
-                    <th scope="col" class="table__th">Ponente</th>
+                    <th scope="col" class="table__th"><?php echo t('Evento'); ?></th>
+                    <th scope="col" class="table__th"><?php echo t('Categoría'); ?></th>
+                    <th scope="col" class="table__th"><?php echo t('Día y hora'); ?></th>
+                    <th scope="col" class="table__th"><?php echo t('Ponente'); ?></th>
                     <th scope="col" class="table__th"></th>
                 </tr>
             </thead>
@@ -39,14 +39,14 @@
                         <td class="table__td--actions">
                             <a class="table__action table__action--edit" href="/admin/events/edit?id=<?php echo $event->id; ?>">
                                 <i class="fa-solid fa-pencil"></i>
-                                Editar
+                                <?php echo t('Editar'); ?>
                             </a>
 
                             <form method="POST" action="/admin/events/delete" class="table__form">
                                 <input type="hidden" name="id" value="<?php echo $event->id; ?>">
                                 <button class="table__action table__action--delete" type="submit">
                                     <i class="fa-solid fa-circle-xmark"></i>
-                                    Eliminar
+                                    <?php echo t('Eliminar'); ?>
                                 </button>
                             </form>
                         </td>
@@ -55,7 +55,7 @@
             </tbody>
         </table>
     <?php } else { ?>
-        <p class="text-center">No hay eventos aún</p>
+        <p class="text-center"><?php echo t('No hay eventos aún'); ?></p>
     <?php } ?>
 </div>
 

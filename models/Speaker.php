@@ -28,22 +28,22 @@ class Speaker extends ActiveRecord {
     }
     public function validate() {
         if(!$this->name) {
-            self::$alerts['error'][] = 'El nombre es necesario';
+            self::$alerts['error'][] = t('El nombre es necesario');
         }
         if(!$this->surname) {
-            self::$alerts['error'][] = '&laquo; Apellido &raquo; es necesario';
+            self::$alerts['error'][] = t('&laquo; Apellido &raquo; es necesario');
         }
         if(!$this->city) {
-            self::$alerts['error'][] = '&laquo; Ciudad &raquo; es necesario';
+            self::$alerts['error'][] = t('&laquo; Ciudad &raquo; es necesario');
         }
         if(!$this->country) {
-            self::$alerts['error'][] = '&laquo; País &raquo; es necesario';
+            self::$alerts['error'][] = t('&laquo; País &raquo; es necesario');
         }
         if(!$this->image) {
-            self::$alerts['error'][] = 'La imagen es necesaria';
+            self::$alerts['error'][] = t('La imagen es necesaria');
         }
         if(!$this->tags) {
-            self::$alerts['error'][] = '&laquo; Áreas &raquo; es necesario';
+            self::$alerts['error'][] = t('&laquo; Áreas &raquo; es necesario');
         }
         return self::$alerts;
     }

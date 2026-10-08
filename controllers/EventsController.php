@@ -41,7 +41,7 @@ class EventsController {
         }
 
         $router->render('admin/events/index', [
-            'title' => 'Conferencias y workshops',
+            'title' => t('Conferencias y workshops'),
             'events' => $events,
             'pagination' => $pagination->pagination()
         ]);
@@ -77,7 +77,7 @@ class EventsController {
             }
         }
         $router->render('admin/events/create', [
-            'title' => 'Registrar evento',
+            'title' => t('Registrar evento'),
             'alerts' => $alerts,
             'categories' => $categories,
             'days' => $days,
@@ -133,7 +133,7 @@ class EventsController {
         }
 
         $router->render('admin/events/edit', [
-            'title' => 'Editar evento',
+            'title' => t('Editar evento'),
             'alerts' => $alerts,
             'categories' => $categories,
             'days' => $days,

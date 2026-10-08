@@ -29,54 +29,54 @@ class ActiveRecord {
     public mixed $new_image;
     public mixed $new_image_2;
     
-    // Base DE DATOS
+    // Database
     protected static \mysqli $db;
     protected static $tabla = '';
     protected static $columnsDB = [];
 
-    // Alertas y Mensajes
+    // Alerts and messages
     protected static $alerts = [];
     
-    // Definir la conexión a la BD - includes/database.php
+    // Set the database connection - includes/database.php
     public static function setDB(\mysqli $database) {
         self::$db = $database;
     }
 
-    // Setear un tipo de Alerta
+    // Set an alert type
     public static function setAlert(string $type, string $message): void {
         static::$alerts[$type][] = $message;
     }
 
-    // Obtener las alertas
+    // Get the alerts
     public static function getAlerts() {
         return static::$alerts;
     }
 
-    // Validación que se hereda en modelos
+    // Validation inherited by models
     public function validate() {
         static::$alerts = [];
         return static::$alerts;
     }
 
-    // Consulta SQL para crear un objeto en Memoria (Active Record)
+    // SQL query to create an object in memory (Active Record)
     public static function consultSQL(string $query): array {
-        // Consultar la base de datos
+        // Query the database
         $result = self::$db->query($query);
 
-        // Iterar los resultados
+        // Iterate over the results
         $array = [];
         while($record = $result->fetch_assoc()) {
             $array[] = static::createObject($record);
         }
 
-        // liberar la memoria
+        // Free the memory
         $result->free();
 
-        // retornar los resultados
+        // Return the results
         return $array;
     }
 
-    // Crea el objeto en memoria que es igual al de la BD
+    // Create an in-memory object matching the database record
     protected static function createObject(array $record): static {
         $object = new static;
 
@@ -88,7 +88,7 @@ class ActiveRecord {
         return $object;
     }
 
-    // Identificar y unir los atributos de la BD
+    // Identify and collect database attributes
     public function attributes() {
         $attributes = [];
         foreach(static::$columnsDB as $column) {
@@ -98,7 +98,7 @@ class ActiveRecord {
         return $attributes;
     }
 
-    // Sanitizar los datos antes de guardarlos en la BD
+    // Sanitize data before saving it to the database
     public function sanitizeAttributes():array{
         $attributes = $this->attributes();
         $sanitizado = [];
@@ -108,7 +108,7 @@ class ActiveRecord {
         return $sanitizado;
     }
 
-    // Sincroniza BD con Objetos en memoria
+    // Synchronize the database with in-memory objects
     public function syncronize($args=[]) { 
         foreach($args as $key => $value) {
           if(property_exists($this, $key) && !is_null($value)) {
@@ -117,67 +117,67 @@ class ActiveRecord {
         }
     }
 
-    // Registros - CRUD
+    // Records - CRUD
     public function save() {
         $result = '';
         if(!is_null($this->id)) {
             // update
             $result = $this->update();
         } else {
-            // Creando un nuevo registro
+            // Create a new record
             $result = $this->create();
         }
         return $result;
     }
 
-    // Obtener todos los Registros
+    // Get all records
     public static function all($orden = 'DESC') {
         $query = "SELECT * FROM " . static::$tabla . " ORDER BY id $orden";
         $result = self::consultSQL($query);
         return $result;
     }
 
-    // Busca un registro por su id
+    // Find a record by its ID
     public static function find(int|string $id): ?static {
         $query = "SELECT * FROM " . static::$tabla  ." WHERE id = $id";
         $result = self::consultSQL($query);
         return array_shift($result);
     }
 
-    // Obtener Registros con cierta cantidad
+    // Get a limited number of records
     public static function get(int $limite): array {
         $query = "SELECT * FROM " . static::$tabla . " ORDER BY id DESC LIMIT $limite ";
         $result = self::consultSQL($query);
         return $result;
     }
-    // Paginar los registros
+    // Paginate records
     public static function paginate(int $per_page, int $offset): array {
         $query = "SELECT * FROM " . static::$tabla . " ORDER BY id DESC LIMIT $per_page OFFSET $offset ";
         $result = self::consultSQL($query);
         return $result;
     }
 
-    // Busqueda Where con Columna 
+    // Find by a column 
     public static function where(string $column, mixed $value): ?static {
         $query = "SELECT * FROM " . static::$tabla . " WHERE $column = '$value'";
         $result = self::consultSQL($query);
         return array_shift($result);
     }
 
-    // Retornar los registros por un orden
+    // Return records ordered by a column
     public static function order(string $column, string $orden): array {
         $query = "SELECT * FROM " . static::$tabla . " ORDER BY $column $orden "; 
         $result = self::consultSQL($query);
         return $result;
     }
-    // Retornar por orden y con un limite
+    // Return records ordered with a limit
     public static function orderLimit(string $column, string $orden, int $limite): array {
         $query = "SELECT * FROM " . static::$tabla . " ORDER BY $column $orden LIMIT $limite "; 
         $result = self::consultSQL($query);
         return $result;
     }
 
-    // Busqueda Where con Múltiples opciones
+    // Find by multiple conditions
     public static function whereArray($array = []) {
         $query = "SELECT * FROM " . static::$tabla . " WHERE ";
         foreach($array as $key => $value) {
@@ -191,7 +191,7 @@ class ActiveRecord {
         return $result;
     }
     
-    // Traer un total de registros
+    // Get the total number of records
     public static function total($column = '', $value = '') {
         $query = "SELECT COUNT(*) FROM " . static::$tabla;
         if($column) {
@@ -203,7 +203,7 @@ class ActiveRecord {
         return array_shift($total);
     }
 
-    // Total de Registros con un Array Where
+    // Total records with multiple conditions
     public static function totalArray($array = []) {
         $query = "SELECT COUNT(*) FROM " . static::$tabla . " WHERE ";
         foreach($array as $key => $value) {
@@ -218,12 +218,12 @@ class ActiveRecord {
         return array_shift($total);
     }
 
-    // crea un nuevo registro
+    // Create a new record
     public function create(): array {
-        // Sanitizar los datos
+        // Sanitize the data
         $attributes = $this->sanitizeAttributes();
 
-        // Insertar en la base de datos
+        // Insert into the database
         $query = " INSERT INTO " . static::$tabla . " ( ";
         $query .= join(', ', array_keys($attributes));
         $query .= " ) VALUES (' "; 
@@ -232,7 +232,7 @@ class ActiveRecord {
 
         // debug($query);
 
-        // Resultado de la consulta
+        // Query result
         $result = self::$db->query($query);
         return [
            'result' =>  $result,
@@ -240,59 +240,59 @@ class ActiveRecord {
         ];
     }
 
-    // update registry
+    // Update record
     public function update() {
-        // Sanitizar los datos
+        // Sanitize the data
         $attributes = $this->sanitizeAttributes();
 
-        // Iterar para ir agregando cada campo de la BD
+        // Iterate through each database field
         $valuees = [];
         foreach($attributes as $key => $value) {
             $valuees[] = "{$key}='{$value}'";
         }
 
-        // Consulta SQL
+        // SQL query
         $query = "UPDATE " . static::$tabla ." SET ";
         $query .=  join(', ', $valuees );
         $query .= " WHERE id = '" . self::$db->escape_string($this->id) . "' ";
         $query .= " LIMIT 1 ";
 
-        // update BD
+        // Update the database
         $result = self::$db->query($query);
         return $result;
     }
 
-    // delete a Record por su ID
+    // Delete a record by its ID
     public function delete() {
         $query = "DELETE FROM "  . static::$tabla . " WHERE id = " . self::$db->escape_string($this->id) . " LIMIT 1";
         $result = self::$db->query($query);
         return $result;
     }
-    // Comprobar el password
+    // Check the password
     public function check_password(): bool
     {
         return password_verify($this->current_password, $this->password);
     }
 
-    // Hashea el password
+    // Hash the password
     public function hashPassword(): void
     {
         $this->password = password_hash($this->password, PASSWORD_BCRYPT);
     }
 
-    // Generar un Token
+    // Generate a token
     public function createToken(): void
     {
         $this->token = md5(uniqid());
     }
-    // Valida el Password 
+    // Validate the password 
     public function validatePassword()
     {
         if (!$this->password) {
-            self::$alerts['error'][] = 'El campo &laquo;Contraseña&raquo; no puede ir vacío';
+            self::$alerts['error'][] = t('El campo &laquo;Contraseña&raquo; no puede ir vacío');
         }
         if (strlen($this->password) < 6) {
-            self::$alerts['error'][] = 'La contraseña debe contener al menos 6 caracteres';
+            self::$alerts['error'][] = t('La contraseña debe contener al menos 6 caracteres');
         }
         return self::$alerts;
     }
@@ -300,13 +300,13 @@ class ActiveRecord {
     public function new_password(): array
     {
         if (!$this->current_password) {
-            self::$alerts['error'][] = 'El campo &laquo;Contraseña actual&raquo; no puede ir vacío';
+            self::$alerts['error'][] = t('El campo &laquo;Contraseña actual&raquo; no puede ir vacío');
         }
         if (!$this->new_password) {
-            self::$alerts['error'][] = 'El campo &laquo;Nueva contraseña&raquo; no puede ir vacío';
+            self::$alerts['error'][] = t('El campo &laquo;Nueva contraseña&raquo; no puede ir vacío');
         }
         if (strlen($this->new_password) < 6) {
-            self::$alerts['error'][] = 'La contraseña debe contener al menos 6 caracteres';
+            self::$alerts['error'][] = t('La contraseña debe contener al menos 6 caracteres');
         }
         return self::$alerts;
     }

@@ -17,7 +17,7 @@ class GiftsController {
 
         $router->render('admin/gifts/index', [
 
-            'title' => 'Regalos',
+            'title' => t('Regalos'),
             'gifts' => $gifts
 
         ]);
@@ -38,10 +38,10 @@ class GiftsController {
 
             $gift->syncronize($_POST);
 
-            // validar
+            // Validate
             $alerts = $gift->validate();
 
-            // Guardar el registro
+            // Save the record
             if (empty($alerts)) {
                 $gift->save();
                 header('Location: /admin/gifts');
@@ -49,7 +49,7 @@ class GiftsController {
         }
 
         $router->render('admin/gifts/create', [
-            'title' => 'Registrar regalo',
+            'title' => t('Registrar regalo'),
             'alerts' => $alerts,
             'gift' => $gift
 
@@ -63,7 +63,7 @@ class GiftsController {
 
         $alerts = [];
 
-        // Validar el ID
+        // Validate the ID
         $id = $_GET['id'];
         $id = filter_var($id, FILTER_VALIDATE_INT);
 
@@ -71,7 +71,7 @@ class GiftsController {
             header('Location: /admin/gifts');
         }
 
-        // Obtener regalo a editar
+        // Get the gift to edit
         $gift = Gift::find($id);
 
         if (!$gift) {
@@ -96,7 +96,7 @@ class GiftsController {
         }
 
         $router->render('admin/gifts/edit', [
-            'title' => 'Actualizar regalo',
+            'title' => t('Actualizar regalo'),
             'alerts' => $alerts,
             'gift' => $gift
         ]);

@@ -2,7 +2,7 @@
     <legend class="form__legend"><?php echo t('Información personal'); ?></legend>
 
     <div class="form__field">
-        <label for="name" class="form__label"<?php echo t('Nombre'); ?></label>
+        <label for="name" class="form__label"><?php echo t('Nombre'); ?></label>
         <input
             type="text"
             class="form__input"
@@ -13,7 +13,7 @@
     </div>
 
     <div class="form__field">
-        <label for="surname" class="form__label"<?php echo t('Apellidos'); ?></label>
+        <label for="surname" class="form__label"><?php echo t('Apellidos'); ?></label>
         <input
             type="text"
             class="form__input"
@@ -24,7 +24,7 @@
     </div>
 
     <div class="form__field">
-        <label for="city" class="form__label"<?php echo t('Ciudad'); ?></label>
+        <label for="city" class="form__label"><?php echo t('Ciudad'); ?></label>
         <input
             type="text"
             class="form__input"
@@ -35,7 +35,7 @@
     </div>
 
     <div class="form__field">
-        <label for="country" class="form__label"placeholder="<?php echo t('País'); ?>"
+        <label for="country" class="form__label"><?php echo t('País'); ?></label>
         <input
             type="text"
             class="form__input"
@@ -45,7 +45,7 @@
             value="<?php echo $speaker->country ?? ''; ?>">
     </div>
     <div class="form__field">
-        <label for="image" class="form__label"<?php echo t('Imagen'); ?></label>
+        <label for="image" class="form__label"><?php echo t('Imagen'); ?></label>
         <input
             type="file"
             class="form__input form__input--file"
@@ -71,7 +71,7 @@
     <legend class="form__legend"><?php echo t('Información extra'); ?></legend>
 
     <div class="form__field">
-        <label for="tags_input" class="form__label"><?php echo t('Áreas de experiencia (separadas por la tecla &laquo;espacio&raquo;'); ?></label>
+        <label for="tags_input" class="form__label"><?php echo t('Áreas de experiencia (separadas por la tecla &laquo;espacio&raquo;)'); ?></label>
         <input
             type="text"
             class="form__input"

@@ -1,34 +1,34 @@
 <fieldset class="form__fieldset">
-    <legend class="form__legend">Información evento</legend>
+    <legend class="form__legend"><?php echo t('Información evento'); ?></legend>
 
     <div class="form__field">
-        <label for="name" class="form__label">Nombre evento</label>
+        <label for="name" class="form__label"><?php echo t('Nombre evento'); ?></label>
         <input
             type="text"
             class="form__input"
             id="name"
             name="name"
-            placeholder="Nombre evento"
+            placeholder="<?php echo t('Nombre evento'); ?>"
             value="<?php echo isset($event) ? $event->name : ''; ?>">
     </div>
 
     <div class="form__field">
-        <label for="description" class="form__label">Descripción</label>
+        <label for="description" class="form__label"><?php echo t('Descripción'); ?></label>
         <textarea
             class="form__input"
             id="description"
             name="description"
-            placeholder="Descripción evento"
+            placeholder="<?php echo t('Descripción evento'); ?>"
             rows="8"><?php echo isset($event) ? $event->description : ''; ?></textarea>
     </div>
 
     <div class="form__field">
-        <label for="category" class="form__label">Categoría o tipo de evento</label>
+        <label for="category" class="form__label"><?php echo t('Categoría o tipo de evento'); ?></label>
         <select
             class="form__select"
             id="category"
             name="category_id">
-            <option value="">- Seleccionar -</option>
+            <option value=""><?php echo t('- Seleccionar -'); ?></option>
             <?php foreach (($categories ?? []) as $category) { ?>
                 <?php if (!is_object($category)) {
                     continue;
@@ -43,7 +43,7 @@
     </div>
 
     <div class="form__field">
-        <label for="category" class="form__label">Selecciona el día</label>
+        <label for="category" class="form__label"><?php echo t('Selecciona el día'); ?></label>
 
         <div class="form__radio">
             <?php foreach (($days ?? []) as $day) { ?>
@@ -66,7 +66,7 @@
     </div>
 
     <div id="hours" class="form__field">
-        <label class="form__label">Seleccionar hora</label>
+        <label class="form__label"><?php echo t('Seleccionar hora'); ?></label>
 
         <ul id="hours" class="hours">
             <?php foreach (($hours ?? []) as $hour) { ?>
@@ -83,29 +83,29 @@
 
 
 <fieldset class="form__fieldset">
-    <legend class="form__legend">Información extra</legend>
+    <legend class="form__legend"><?php echo t('Información extra'); ?></legend>
 
     <div class="form__field">
-        <label for="speakers" class="form__label">Ponente</label>
+        <label for="speakers" class="form__label"><?php echo t('Ponente'); ?></label>
         <input
             type="text"
             class="form__input"
             id="speakers"
-            placeholder="Buscar ponente">
+            placeholder="<?php echo t('Buscar ponente'); ?>">
         <ul id="listing-speakers" class="listing-speakers"></ul>
 
         <input type="hidden" name="speaker_id" value="<?php echo isset($event) && isset($event->speaker_id) ? $event->speaker_id : ''; ?>">
     </div>
 
     <div class="form__field">
-        <label for="availables" class="form__label">Cupos disponibles</label>
+        <label for="availables" class="form__label"><?php echo t('Cupos disponibles'); ?></label>
         <input
             type="number"
             min="1"
             class="form__input"
             id="availables"
             name="availables"
-            placeholder="Ej. 20"
+            placeholder="<?php echo t('Ej. 20'); ?>"
             value="<?php echo isset($event) && isset($event->availables) ? $event->availables : ''; ?>">
     </div>
 

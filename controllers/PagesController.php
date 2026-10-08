@@ -38,16 +38,16 @@ class PagesController {
             }
         }
 
-        // Obtener el total de cada bloque
+        // Get the total for each block
         $speakers_total = Speaker::total();
         $conferences_total = Event::total('category_id', 1);
         $workshops_total = Event::total('category_id', 2);
 
-        // Obtener todos los ponentes
+        // Get all speakers
         $speakers = Speaker::all();
 
         $router->render('pages/index', [
-            'title' => 'Inicio',
+            'title' => t('Inicio'),
             'events' => $events_formatted,
             'speakers_total' => $speakers_total,
             'conferences_total' => $conferences_total,
@@ -58,18 +58,18 @@ class PagesController {
     public static function event(Router $router) {
 
         $router->render('pages/devcon', [
-            'title' => 'Sobre DevCon'
+            'title' => t('Sobre DevCon')
         ]);
     }
     public static function packs(Router $router) {
 
         $router->render('pages/packs', [
-            'title' => 'Paquetes DevCon'
+            'title' => t('Paquetes DevCon')
         ]);
     }
     public static function conferences(Router $router) {
         // $events = Event::where('category_id', 1);
-        // $events = Event::where('category_id', 2);77esto asi lo haria muy complicado
+        // $events = Event::where('category_id', 2);
         $events = Event::order('hour_id', 'ASC');
 
         $events_formatted = [];
@@ -98,14 +98,14 @@ class PagesController {
         }
 
         $router->render('pages/conferences', [
-            'title' => 'conferences & Workshops',
+            'title' => t('conferences & Workshops'),
             'events' => $events_formatted
         ]);
     }
     public static function error(Router $router) {
 
         $router->render('pages/error', [
-            'title' => 'Página no encontrada'
+            'title' => t('Página no encontrada')
         ]);
     }
 }

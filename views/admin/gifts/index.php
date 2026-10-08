@@ -1,4 +1,4 @@
-<h2 class="dashboard__heading"><?php echo $title ?? 'Regalos'; ?></h2>
+<h2 class="dashboard__heading"><?php echo t($title ?? 'Regalos'); ?></h2>
 
 <div class="dashboard__graph">
     <canvas id="gifts-graph" width="400" height="400"></canvas>
@@ -8,7 +8,7 @@
     <div class="dashboard__container-btn">
         <a class="dashboard__btn" href="/admin/gifts/create">
             <i class="fa-solid fa-circle-plus"></i>
-            Crear regalo
+            <?php echo t('Crear regalo'); ?>
         </a>
     </div>
 
@@ -16,10 +16,10 @@
         <table class="table">
             <thead class="table__thead">
                 <tr>
-                    <th scope="col" class="table__th">Regalo</th>
-                    <th scope="col" class="table__th">Total</th>
-                    <th scope="col" class="table__th">Reservados</th>
-                    <th scope="col" class="table__th">Disponibles</th>
+                    <th scope="col" class="table__th"><?php echo t('Regalo'); ?></th>
+                    <th scope="col" class="table__th"><?php echo t('Total'); ?></th>
+                    <th scope="col" class="table__th"><?php echo t('Reservados'); ?></th>
+                    <th scope="col" class="table__th"><?php echo t('Disponibles'); ?></th>
                     <th scope="col" class="table__th"></th>
                 </tr>
             </thead>
@@ -43,7 +43,7 @@
                         <td class="table__td--actions">
                             <a class="table__action table__action--edit" href="/admin/gifts/edit?id=<?php echo $gift->id; ?>">
                                 <i class="fa-solid fa-pencil"></i>
-                                Editar
+                                <?php echo t('Editar'); ?>
                             </a>
 
                             <form method="POST" action="/admin/gifts/delete">
@@ -51,7 +51,7 @@
 
                                 <button class="table__action table__action--delete" type="submit">
                                     <i class="fa-solid fa-circle-xmark"></i>
-                                    Eliminar
+                                    <?php echo t('Eliminar'); ?>
                                 </button>
                             </form>
                         </td>
@@ -60,6 +60,6 @@
             </tbody>
         </table>
     <?php } else { ?>
-        <p class="text-center">No hay regalos aún</p>
+        <p class="text-center"><?php echo t('No hay regalos aún'); ?></p>
     <?php } ?>
 </div>
