@@ -1,5 +1,7 @@
 <?php
 
+$translations = require __DIR__ . '/translations.php';
+
 function debuguear(mixed $variable): void {
     echo "<pre>";
     var_dump($variable);
@@ -29,7 +31,23 @@ function is_admin() : bool {
 }
 
 function aos_animation() : void {
-    $efectos = ['fade-up', 'fade-down', 'fade-left', 'fade-right', 'flip-left', 'flip-right', 'zoom-in', 'zoom-in-up', 'zoom-in-down', 'zoom-out'];
-    $efecto = array_rand($efectos, 1);
-    echo ' data-aos="' . $efectos[$efecto] . '" ';
+    $effects = ['fade-up', 'fade-down', 'fade-left', 'fade-right', 'flip-left', 'flip-right', 'zoom-in', 'zoom-in-up', 'zoom-in-down', 'zoom-out'];
+    $effect = array_rand($effects, 1);
+    echo ' data-aos="' . $effects[$effect] . '" ';
+}
+
+function currentLanguage(): string {
+    $language = $_COOKIE['language'] ?? 'es';
+
+    return in_array($language, ['es', 'en'], true) ? $language : 'es';
+}
+
+function t(string $text): string {
+    global $translations;
+
+    if (currentLanguage() === 'es') {
+        return $text;
+    }
+
+    return $translations[$text] ?? $text;
 }

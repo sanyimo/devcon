@@ -1,0 +1,25 @@
+<?php
+
+return [
+    'Idioma' => 'Language',
+    'Español' => 'Spanish',
+    'Inglés' => 'English',
+    'Administrar' => 'Manage',
+    'Cerrar sesión' => 'Log out',
+    'Registro' => 'Register',
+    'Iniciar sesión' => 'Log in',
+    '8-9 octubre 2027' => 'October 8-9, 2027',
+    'En Línea - Presencial' => 'Online - In person',
+    'Conseguir entradas' => 'Get tickets',
+    'Evento' => 'Event',
+    'Paquetes' => 'Packages',
+    'Workshops / Conferencias' => 'Workshops / Conferences',
+    'Entradas' => 'Tickets',
+    'DevCon es una conferencia para desarrolladores de todos los niveles, se lleva a cabo de forma presencial y en línea.' => 'DevCon is a conference for developers of all levels, held both in person and online.',
+    'Todos los derechos reservados' => 'All rights reserved',
+    'Inicio' => 'Home',
+    'Ponentes' => 'Speakers',
+    'Eventos' => 'Events',
+    'Registrados' => 'Registered',
+    'Regalos' => 'Gifts',
+];
