@@ -7,7 +7,7 @@
             <picture>
                 <source srcset="img/speakers/<?php echo $event->speaker->image; ?>.webp" type="image/webp">
                 <source srcset="img/speakers/<?php echo $event->speaker->image; ?>.png" type="image/png">
-                <img class="event__image-autor" loading="lazy" width="200" height="300" src="img/speakers/<?php echo $event->speaker->image; ?>.png" alt=<?php echo t('Imagen Ponente'); ?>>
+                <img class="event__image-autor" loading="lazy" width="200" height="300" src="img/speakers/<?php echo $event->speaker->image; ?>.png" alt="<?php echo t('Imagen Ponente'); ?>">
             </picture>
             <p class="event__autor-name">
                 <?php echo $event->speaker->name . " " . $event->speaker->surname; ?>

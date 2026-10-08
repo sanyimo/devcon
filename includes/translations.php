@@ -22,4 +22,5 @@ return [
     'Eventos' => 'Events',
     'Registrados' => 'Registered',
     'Regalos' => 'Gifts',
+    'Imagen Ponente' => 'Speaker image',
 ];
