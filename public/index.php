@@ -1,0 +1,91 @@
+<?php 
+
+require_once __DIR__ . '/../includes/app.php';
+
+use MVC\Router;
+use Controllers\APIEvents;
+use Controllers\APIGifts;
+use Controllers\APISpeakers;
+use Controllers\AuthController;
+use Controllers\EventsController;
+use Controllers\PagesController;
+use Controllers\GiftsController;
+use Controllers\SpeakersController;
+use Controllers\RecordController;
+use Controllers\DashboardController;
+use Controllers\RecordedController;
+
+$router = new Router();
+
+
+// Login
+$router->get('/login', [AuthController::class, 'login']);
+$router->post('/login', [AuthController::class, 'login']);
+$router->post('/logout', [AuthController::class, 'logout']);
+
+// Crear Cuenta
+$router->get('/record', [AuthController::class, 'record']);
+$router->post('/record', [AuthController::class, 'record']);
+
+// form de olvide mi password
+$router->get('/forgot', [AuthController::class, 'forgot']);
+$router->post('/forgot', [AuthController::class, 'forgot']);
+
+// Colocar el nuevo password
+$router->get('/restore', [AuthController::class, 'restore']);
+$router->post('/restore', [AuthController::class, 'restore']);
+
+// Confirmación de Cuenta
+$router->get('/message', [AuthController::class, 'message']);
+$router->get('/confirm-account', [AuthController::class, 'confirm']);
+
+// Area de administración
+$router->get('/admin/dashboard', [DashboardController::class, 'index']);
+
+$router->get('/admin/speakers', [SpeakersController::class, 'index']);
+$router->get('/admin/speakers/create', [SpeakersController::class, 'create']);
+$router->post('/admin/speakers/create', [SpeakersController::class, 'create']);
+$router->get('/admin/speakers/edit', [SpeakersController::class, 'edit']);
+$router->post('/admin/speakers/edit', [SpeakersController::class, 'edit']);
+$router->post('/admin/speakers/delete', [SpeakersController::class, 'delete']);
+
+
+$router->get('/admin/events', [EventsController::class, 'index']);
+$router->get('/admin/events/create', [EventsController::class, 'create']);
+$router->post('/admin/events/create', [EventsController::class, 'create']);
+$router->get('/admin/events/edit', [EventsController::class, 'edit']);
+$router->post('/admin/events/edit', [EventsController::class, 'edit']);
+$router->post('/admin/events/delete', [EventsController::class, 'delete']);
+
+$router->get('/api/events-schedule', [APIEvents::class, 'index']);
+$router->get('/api/speakers', [APISpeakers::class, 'index']);
+$router->get('/api/speaker', [APISpeakers::class, 'speaker']);
+$router->get('/api/gifts', [APIGifts::class, 'index']);
+
+$router->get('/admin/recorded', [RecordedController::class, 'index']);
+
+$router->get('/admin/gifts', [GiftsController::class, 'index']);
+$router->get('/admin/gifts/create', [GiftsController::class, 'create']);
+$router->post('/admin/gifts/create', [GiftsController::class, 'create']);
+$router->get('/admin/gifts/edit', [GiftsController::class, 'edit']);
+$router->post('/admin/gifts/edit', [GiftsController::class, 'edit']);
+$router->post('/admin/gifts/delete', [GiftsController::class, 'delete']);
+
+// Registro de Usuarios
+$router->get('/finish-record', [RecordController::class, 'create']);
+$router->post('/finish-record/free', [RecordController::class, 'free']);
+$router->post('/finish-record/purchase', [RecordController::class, 'purchase']);
+$router->get('/finish-record/conferences', [RecordController::class, 'conferences']);
+$router->post('/finish-record/conferences', [RecordController::class, 'conferences']);
+
+// virtual ticket
+$router->get('/ticket', [RecordController::class, 'ticket']);
+
+// Área pública
+$router->get('/', [PagesController::class, 'index']);
+$router->get('/devcon', [PagesController::class, 'event']);
+$router->get('/packs', [PagesController::class, 'packs']);
+$router->get('/workshops-conferences', [PagesController::class, 'conferences']);
+$router->get('/404', [PagesController::class, 'error']);
+
+$router->checkRoutes();
