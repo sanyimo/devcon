@@ -1,6 +1,6 @@
 <main class="auth">
-    <h2 class="auth__heading"><?php echo $title ?? 'Recuperar acceso'; ?></h2>
-    <p class="auth__text">Recupera tu acceso a DevCon</p>
+    <h2 class="auth__heading"><?php echo t($title ?? 'Recuperar acceso'); ?></h2>
+    <p class="auth__text"><?php echo t('Recupera tu acceso a DevCon'); ?></p>
 
     <?php
     require_once __DIR__ . '/../templates/alerts.php';
@@ -12,17 +12,17 @@
             <input
                 type="email"
                 class="form__input"
-                placeholder="Tu e-mail"
+                placeholder="<?php echo t('Tu e-mail'); ?>"
                 id="email"
                 name="email"
                 autocomplete="email">
         </div>
 
-        <input type="submit" class="form__submit" value="Enviar instrucciones">
+        <input type="submit" class="form__submit" value="<?php echo t('Enviar instrucciones'); ?>">
     </form>
 
     <div class="actions">
-        <a href="/login" class="actions__link Iniciar sesión</a>
-        <a href=" /record" class="actions__link">¿Aún no tienes una cuenta? Crea una</a>
+        <a href="/login" class="actions__link"><?php echo t('Iniciar sesión'); ?></a>
+        <a href="/record" class="actions__link"><?php echo t('¿Aún no tienes una cuenta? Crea una'); ?></a>
     </div>
 </main>
