@@ -1,30 +1,30 @@
 <main class="record">
-    <h2 class="record__heading"><?php echo $title ?? 'Registro'; ?></h2>
-    <p class="record__description">Elige tu plan</p>
+    <h2 class="record__heading"><?php echo $title ?? t('Registro'); ?></h2>
+    <p class="record__description"><?php echo t('Elige tu plan'); ?></p>
 
     <div class="packs__grid">
         <div class="pack">
-            <h3 class="pack__name">Entrada gratuita</h3>
+            <h3 class="pack__name"><?php echo t('Entrada gratuita'); ?></h3>
             <ul class="pack__list">
-                <li class="pack__element">Acceso virtual a DevCon</li>
+                <li class="pack__element"><?php echo t('Acceso virtual a DevCon'); ?></li>
             </ul>
 
             <p class="pack__price">0€</p>
 
             <form method="POST" action="/finish-record/free">
-                <input class="packs__submit" type="submit" value="Inscripción gratuita">
+                <input class="packs__submit" type="submit" value="<?php echo t('Inscripción gratuita'); ?>">
             </form>
         </div>
 
         <div class="pack">
-            <h3 class="pack__name">Entrada presencial</h3>
+            <h3 class="pack__name"><?php echo t('Entrada presencial'); ?></h3>
             <ul class="pack__list">
-                <li class="pack__element">Acceso presencial a DevCon</li>
-                <li class="pack__element">Entrada para 2 días</li>
-                <li class="pack__element">Acceso a talleres y conferencias</li>
-                <li class="pack__element">Acceso a las grabaciones</li>
-                <li class="pack__element">Camisa del evento</li>
-                <li class="pack__element">Comida y bebida</li>
+                <li class="pack__element"><?php echo t('Acceso presencial a DevCon'); ?></li>
+                <li class="pack__element"><?php echo t('Entrada para 2 días'); ?></li>
+                <li class="pack__element"><?php echo t('Acceso a talleres y conferencias'); ?></li>
+                <li class="pack__element"><?php echo t('Acceso a las grabaciones'); ?></li>
+                <li class="pack__element"><?php echo t('Camisa del evento'); ?></li>
+                <li class="pack__element"><?php echo t('Comida y bebida'); ?></li>
             </ul>
 
             <p class="pack__price">199€</p>
@@ -37,12 +37,12 @@
         </div>
 
         <div class="pack">
-            <h3 class="pack__name">Entrada virtual</h3>
+            <h3 class="pack__name"><?php echo t('Entrada virtual'); ?></h3>
             <ul class="pack__list">
-                <li class="pack__element">Acceso virtual a DevCon</li>
-                <li class="pack__element">Entrada para 2 días</li>
-                <li class="pack__element">Acceso a talleres y conferencias</li>
-                <li class="pack__element">Acceso a las grabaciones</li>
+                <li class="pack__element"><?php echo t('Acceso virtual a DevCon'); ?></li>
+                <li class="pack__element"><?php echo t('Entrada para 2 días'); ?></li>
+                <li class="pack__element"><?php echo t('Acceso a talleres y conferencias'); ?></li>
+                <li class="pack__element"><?php echo t('Acceso a las grabaciones'); ?></li>
             </ul>
 
             <p class="pack__price">49€</p>
@@ -61,7 +61,7 @@
 
 <script>
     function initPayPalButton() {
-        //pase presencial
+        // In-person pass
         paypal.Buttons({
             style: {
                 shape: 'rect',
@@ -115,7 +115,7 @@
             }
         }).render('#paypal-button-container');
 
-        //pase virtual
+        // Virtual pass
         paypal.Buttons({
             style: {
                 shape: 'rect',

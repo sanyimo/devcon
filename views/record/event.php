@@ -13,7 +13,7 @@ if (!isset($event)) {
             <picture>
                 <source srcset="<?php echo $_ENV['HOST']; ?>/img/speakers/<?php echo $event->speaker->image; ?>.webp" type="image/webp">
                 <source srcset="<?php echo $_ENV['HOST']; ?>/img/speakers/<?php echo $event->speaker->image; ?>.png" type="image/png">
-                <img class="event__image-autor" loading="lazy" width="200" height="300" src="<?php echo $_ENV['HOST']; ?>/img/speakers/<?php echo $event->speaker->image; ?>.png" alt="Imagen Ponente">
+                <img class="event__image-autor" loading="lazy" width="200" height="300" src="<?php echo $_ENV['HOST']; ?>/img/speakers/<?php echo $event->speaker->image; ?>.png" alt="<?php echo t('Imagen Ponente'); ?>">
             </picture>
             <p class="event__autor-name">
                 <?php echo $event->speaker->name . " " . $event->speaker->surname; ?>
@@ -25,7 +25,7 @@ if (!isset($event)) {
             data-id="<?php echo $event->id; ?>"
             class="event__add"
             <?php echo ($event->availables === "0") ? 'disabled' : ''; ?>>
-            <?php echo ($event->availables === "0") ? 'Agotado' : 'Agregar - ' .  $event->availables . ' Disponibles' ?>
+            <?php echo ($event->availables === "0") ? t('Agotado') : t('Agregar') . ' - ' . $event->availables . ' ' . t('Disponibles'); ?>
         </button>
     </div>
 </div>

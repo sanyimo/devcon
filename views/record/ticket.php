@@ -1,6 +1,6 @@
 <main class="pagina">
-    <h2 class="page__heading"><?php echo $title ?? 'Ticket de entrada'; ?></h2>
-    <p class="page__description">Aquí tienes tu ticket de entrada. <br> Lo puedes localizar fácilmente pulsando la pestaña <strong>"Administrar"</strong> de arriba.</p>
+    <h2 class="page__heading"><?php echo $title ?? t('Ticket de entrada'); ?></h2>
+    <p class="page__description"><?php echo t('Aquí tienes tu ticket de entrada.'); ?> <br> <?php echo t('Lo puedes localizar fácilmente pulsando la pestaña'); ?> <strong>"<?php echo t('Administrar'); ?>"</strong> <?php echo t('de arriba.'); ?></p>
 
     <div class="ticket-virtual">
 
