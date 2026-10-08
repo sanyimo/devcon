@@ -18,8 +18,8 @@
                 <tr>
                     <th scope="col" class="table__th"><?php echo t('Regalo'); ?></th>
                     <th scope="col" class="table__th"><?php echo t('Total'); ?></th>
-                    <th scope="col" class="table__th"><?php echo t('Reservados'); ?></th>
-                    <th scope="col" class="table__th"><?php echo t('Disponibles'); ?></th>
+                    <th scope="col" class="table__th"><?php echo t('Ya distribuidos'); ?></th>
+                    <th scope="col" class="table__th"><?php echo t('Restantes'); ?></th>
                     <th scope="col" class="table__th"></th>
                 </tr>
             </thead>

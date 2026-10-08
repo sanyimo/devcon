@@ -82,6 +82,7 @@ $router->post('/purchase/conferences', [RecordController::class, 'conferences'])
 $router->get('/manage', [RecordController::class, 'manage']);
 $router->post('/deregister', [AuthController::class, 'deregister']);
 $router->post('/cancel-ticket', [RecordController::class, 'cancel']);
+$router->post('/manage/gift', [RecordController::class, 'updateGift']);
 
 // Virtual ticket
 $router->get('/ticket', [RecordController::class, 'ticket']);

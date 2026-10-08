@@ -105,7 +105,7 @@ import { t } from './i18n'
             data.append('events', eventsId)
             data.append('gift_id', giftId)
 
-            const url = '/finish-registration/conferences'
+            const url = '/purchase/conferences?token=' + encodeURIComponent(new URLSearchParams(window.location.search).get('token') || '')
             const response = await fetch(url, {
                 method: 'POST',
                 body: data

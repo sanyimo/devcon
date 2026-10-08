@@ -105,7 +105,7 @@
                         .then(response => response.json())
                         .then(result => {
                             if (result.result) {
-                                actions.redirect('http://localhost:3000/purchase/conferences');
+                                actions.redirect('/purchase/conferences?token=' + encodeURIComponent(result.token));
                             }
                         })
                 });

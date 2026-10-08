@@ -22,21 +22,19 @@ class RecordController {
         }
 
         if(isset($_GET['view']) && $_GET['view'] === 'ticket') {
-            $record = Record::where('user_id', $_SESSION['id']);
+            $records = Record::whereArray(['user_id' => $_SESSION['id']]);
 
-            if($record) {
-                $record = (object) array_merge((array) $record, [
-                    'user' => User::find($record->user_id),
-                    'pack' => Pack::find($record->pack_id)
-                ]);
-
-                $router->render('record/ticket', [
-                    'title' => t('Asistencia a DevCon'),
-                    'record' => $record,
-                    'preview' => true
-                ]);
-                return;
+            foreach($records as $record) {
+                $record->user = User::find($record->user_id);
+                $record->pack = Pack::find($record->pack_id);
             }
+
+            $router->render('record/ticket', [
+                'title' => t('Asistencia a DevCon'),
+                'records' => $records,
+                'preview' => true
+            ]);
+            return;
         }
 
         $router->render('record/create', [
@@ -95,6 +93,42 @@ class RecordController {
             'title' => t('Administrar'),
             'records' => $records
         ]);
+    }
+
+    public static function updateGift() {
+        if($_SERVER['REQUEST_METHOD'] !== 'POST' || !is_auth()) {
+            header('Location: /manage');
+            return;
+        }
+
+        $token = $_POST['token'] ?? '';
+        $gift_id = filter_var($_POST['gift_id'] ?? '', FILTER_VALIDATE_INT);
+
+        $record = $token ? Record::where('token', $token) : null;
+
+        if(!$record || (string) $record->user_id !== (string) $_SESSION['id'] || !$gift_id) {
+            header('Location: /manage');
+            return;
+        }
+
+        $gift = Gift::find($gift_id);
+
+        if(!$gift) {
+            header('Location: /manage');
+            return;
+        }
+
+        $reserved = Gift::reservations($gift->id);
+
+        if((string) $record->gift_id !== (string) $gift->id && $reserved >= (int) $gift->quantity) {
+            header('Location: /manage');
+            return;
+        }
+
+        $record->gift_id = $gift->id;
+        $record->save();
+
+        header('Location: /manage');
     }
 
     public static function cancel() {
@@ -204,14 +238,15 @@ class RecordController {
 
         // Validate that the user has the in-person plan
         $user_id = $_SESSION['id'];
-        $record = Record::where('user_id', $user_id);
+        $token = $_GET['token'] ?? '';
+        $record = $token
+            ? Record::where('token', $token)
+            : Record::where('user_id', $user_id);
 
-        if(isset($record) && $record->pack_id === "2") {
-            header('Location: /ticket?id=' . urlencode($record->token));
+        if(!$record || (string) $record->user_id !== (string) $user_id || $record->pack_id !== "1") {
+            header('Location: /');
             return;
         }
-        
-        if($record->pack_id !== "1") {
             header('Location: /');
             return;
         }
@@ -250,6 +285,10 @@ class RecordController {
             }
         }
         $gifts = Gift::all('ASC');
+
+        foreach($gifts as $gift) {
+            $gift->availables = (int) $gift->quantity - Gift::reservations($gift->id);
+        }
 
         // Handle registration through $_POST
         if($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -300,7 +339,15 @@ class RecordController {
             }
 
             // Store the gift
-            $record->syncronize(['gift_id' => $_POST['gift_id']]);
+            $gift_id = filter_var($_POST['gift_id'] ?? '', FILTER_VALIDATE_INT);
+            $gift = $gift_id ? Gift::find($gift_id) : null;
+
+            if(!$gift || Gift::reservations($gift->id) >= (int) $gift->quantity) {
+                echo json_encode(['result' => false]);
+                return;
+            }
+
+            $record->syncronize(['gift_id' => $gift->id]);
             $result = $record->save();
 
             if($result) {
