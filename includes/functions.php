@@ -2,7 +2,7 @@
 
 $translations = require __DIR__ . '/translations.php';
 
-function debuguear(mixed $variable): void {
+function debug(mixed $variable): void {
     echo "<pre>";
     var_dump($variable);
     echo "</pre>";

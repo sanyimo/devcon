@@ -1,4 +1,4 @@
-<!-- debuguear($alerts); -->
+<!-- debug($alerts); -->
 <?php
     foreach($alerts as $key => $alert) {
         foreach($alert as $message) {

@@ -25,10 +25,10 @@
                 </h1>
             </a>
 
-            <p data-aos="zoom-in-right" class="header__text">8-9 octubre 2027</p>
-            <p data-aos="zoom-in-right" class="header__text header__text--modality">En Línea - Presencial</p>
+            <p data-aos="zoom-in-right" class="header__text"><?php echo t('8-9 octubre 2027'); ?></p>
+            <p data-aos="zoom-in-right" class="header__text header__text--modality"><?php echo t('En Línea - Presencial'); ?></p>
 
-            <a href="/record" class="header__btn">Conseguir entradas</a>
+            <a href="/record" class="header__btn"><?php echo t('Conseguir entradas'); ?></a>
         </div>
     </div>
 </header>
