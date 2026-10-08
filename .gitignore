@@ -1,0 +1,14 @@
+.vscode
+.DS_Store
+node_modules
+vendor/
+
+css/
+public/build/css/
+public/build/js/
+user.php
+.env
+*.dump
+*.sql
+.htaccess
+modernizr.js
