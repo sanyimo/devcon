@@ -1,0 +1,16 @@
+@use '../../base/variables' as v;
+@use '../../base/mixins' as m;
+
+
+.menu-social_networks {
+    @include m.menu-social(v.$white, 2rem);
+    
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin: 4rem 0;
+
+    @include m.tablet {
+        justify-content: flex-end;
+    }
+}
