@@ -1,9 +1,9 @@
-<header class="header">
+<header id="top" class="header">
     <div class="header__container">
         <nav class="header__navegation">
 
             <?php if(is_auth()) { ?>
-                <a href="<?php echo is_admin() ? '/admin/dashboard' : '/finish-record'; ?>" class="header__link"><?php echo t('Administrar'); ?></a>
+                <a href="<?php echo is_admin() ? '/admin/dashboard' : '/finish-registration'; ?>" class="header__link"><?php echo t('Administrar'); ?></a>
                 <form method="POST" action="/logout" class="header__form">
                     <input type="submit" value="<?php echo t('Cerrar sesión'); ?>" class="header__submit">
                 </form>

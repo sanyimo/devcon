@@ -30,7 +30,7 @@ class RecordController {
         }
 
         if(isset($record) && $record->pack_id === "1") {
-            header('Location: /finish-record/conferences');
+            header('Location: /finish-registration/conferences');
             return;
         }
 
