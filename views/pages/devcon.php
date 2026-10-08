@@ -1,13 +1,13 @@
 <main class="devcon">
-    <h2 class="devcon__heading"><?php echo $title ?? 'DevCon'; ?></h2>
-    <p class="devcon__description">Conoce la conferencia más importante de Europa</p>
+    <h2 class="devcon__heading"><?php echo t($title ?? 'DevCon'); ?></h2>
+    <p class="devcon__description"><?php echo t('Conoce la conferencia más importante de Europa'); ?></p>
 
     <div class="devcon__grid">
         <div <?php aos_animation(); ?> class="devcon__image">
             <picture>
                 <source srcset="build/img/about_devcon.avif" type="image/avif">
                 <source srcset="build/img/about_devcon.webp" type="image/webp">
-                <img loading="lazy" width="200" height="300" src="build/img/about_devcon.jpg" alt="Imagen DevCon">
+                <img loading="lazy" width="200" height="300" src="build/img/about_devcon.jpg" alt="<?php echo t('Imagen DevCon'); ?>">
             </picture>
         </div>
 

@@ -6,29 +6,29 @@ include_once __DIR__ . '/conferences.php';
     <div class="summary__grid">
         <div <?php aos_animation(); ?> class="summary__block">
             <p class="summary__text summary__text--number"><?php echo $speakers_total ?? 0; ?></p>
-            <p class="summary__text">Speakers</p>
+            <p class="summary__text"><?php echo t('Ponentes'); ?></p>
         </div>
 
         <div <?php aos_animation(); ?> class="summary__block">
             <p class="summary__text summary__text--number"><?php echo $conferences_total ?? 0; ?></p>
-            <p class="summary__text">conferences</p>
+            <p class="summary__text"><?php echo t('conferencias'); ?></p>
         </div>
 
         <div <?php aos_animation(); ?> class="summary__block">
             <p class="summary__text summary__text--number"><?php echo $workshops_total ?? 0; ?></p>
-            <p class="summary__text">Workshops</p>
+            <p class="summary__text"><?php echo t('Workshops'); ?></p>
         </div>
 
         <div <?php aos_animation(); ?> class="summary__block">
             <p class="summary__text summary__text--number">500</p>
-            <p class="summary__text">Asistentes</p>
+            <p class="summary__text"><?php echo t('Asistentes'); ?></p>
         </div>
     </div>
 </section>
 
 <section class="speakers">
-    <h2 class="speakers__heading">Speakers</h2>
-    <p class="speakers__description">Conoce a nuestros expertos de DevCon</p>
+    <h2 class="speakers__heading"><?php echo t('Ponentes'); ?></h2>
+    <p class="speakers__description"><?php echo t('Conoce a nuestros expertos de DevCon'); ?></p>
 
     <div class="speakers__grid">
         <?php foreach ($speakers ?? [] as $speaker) { ?>
@@ -46,7 +46,7 @@ include_once __DIR__ . '/conferences.php';
                     <picture>
                         <source srcset="img/speakers/<?php echo $image; ?>.webp" type="image/webp">
                         <source srcset="img/speakers/<?php echo $image; ?>.png" type="image/png">
-                        <img class="speaker__image" loading="lazy" width="200" height="300" src="img/speakers/<?php echo $image; ?>.png" alt="Imagen Ponente">
+                        <img class="speaker__image" loading="lazy" width="200" height="300" src="img/speakers/<?php echo $image; ?>.png" alt="<?php echo t('Imagen Ponente'); ?>">
                     </picture>
                 <?php } ?>
 
@@ -111,28 +111,28 @@ include_once __DIR__ . '/conferences.php';
 <div id="map" class="map"></div>
 
 <section class="tickets">
-    <h2 class="tickets__heading">Tickets & Precios</h2>
-    <p class="tickets__description">Precios para DevCon</p>
+    <h2 class="tickets__heading"><?php echo t('Tickets & Precios'); ?></h2>
+    <p class="tickets__description"><?php echo t('Precios para DevCon'); ?></p>
 
     <div class="tickets__grid">
         <div <?php aos_animation(); ?> class="ticket ticket--presential">
             <h4 class="ticket__logo">&#60;DevCon /></h4>
-            <p class="ticket__plan">Presencial</p>
+            <p class="ticket__plan"><?php echo t('Presencial'); ?></p>
             <p class="ticket__price">199€</p>
         </div>
         <div <?php aos_animation(); ?> class="ticket ticket--virtual">
             <h4 class="ticket__logo">&#60;DevCon /></h4>
-            <p class="ticket__plan">Virtual</p>
+            <p class="ticket__plan"><?php echo t('Virtual'); ?></p>
             <p class="ticket__price">49€</p>
         </div>
 
         <div <?php aos_animation(); ?> class="ticket ticket--free">
             <h4 class="ticket__logo">&#60;DevCon /></h4>
-            <p class="ticket__plan">Gratis</p>
-            <p class="ticket__price">Gratis - 0€</p>
+            <p class="ticket__plan"><?php echo t('Gratis'); ?></p>
+            <p class="ticket__price"><?php echo t('Gratis - 0€'); ?></p>
         </div>
     </div>
     <div class="ticket__link-container">
-        <a href="/packs" class="ticket__link">Ver paquetes</a>
+        <a href="/packs" class="ticket__link"><?php echo t('Ver paquetes'); ?></a>
     </div>
 </section>
