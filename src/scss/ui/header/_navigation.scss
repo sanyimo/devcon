@@ -2,7 +2,7 @@
 @use '../../base/mixins' as m;
 
 
-.navegation {
+.navigation {
     display: flex;
     flex-direction: column;
     @include m.desktop {

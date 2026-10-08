@@ -6,7 +6,7 @@
     require_once __DIR__ . '/../templates/alerts.php';
     ?>
 
-    <form method="POST" action="/record" class="form">
+    <form method="POST" action="/register" class="form">
         <div class="form__field">
             <label for="name" class="form__label"><?php echo t('Nombre'); ?></label>
             <input
