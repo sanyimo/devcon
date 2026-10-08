@@ -1,0 +1,20 @@
+@use '../../base/variables' as v;
+
+.event-modal__close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    z-index: 1;
+    width: 3.5rem;
+    height: 3.5rem;
+    border: 0;
+    border-radius: 50%;
+    background-color: v.$white;
+    color: v.$blackColor;
+    cursor: pointer;
+    box-shadow: 0 0.3rem 1rem rgb(0 0 0 / 20%);
+
+    &:hover {
+        color: v.$red;
+    }
+}

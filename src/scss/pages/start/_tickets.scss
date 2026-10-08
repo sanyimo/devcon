@@ -2,13 +2,6 @@
 @use '../../base/variables' as v;
 
 
-.tickets {
-    &__grid {
-        @include m.container-sm;
-        @include m.grid(1, 5rem);
-    }
-}
-
 .ticket {
     width: min(100% - 5rem, 65rem);
     margin: 0 auto;
@@ -91,7 +84,7 @@
         padding: 10rem 3rem;
 
         @include m.tablet {
-            width: 60rem;
+            width: 55rem;
             height: 30rem;
             padding: 6rem;
             display: flex;
@@ -168,27 +161,6 @@
             clip-path: circle(50% at 75% 50%);
             left:  calc(100% - 5rem);
             top: calc(50% - 2.5rem);
-        }
-    }
-
-    &__actions {
-        display: flex;
-        flex-direction: column;
-        justify-items: center;
-        gap: 1rem;
-        margin-top: 3rem;
-
-        @include m.tablet {
-            flex-direction: row;
-        }
-
-        .cancel-ticket {
-           @include m.btn(v.$secondary, v.$white);
-
-        }
-
-        .delete_account {
-            @include m.btn(v.$red, v.$white)
         }
     }
 }

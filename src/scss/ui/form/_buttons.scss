@@ -1,0 +1,14 @@
+@use '../../base/variables' as v;
+@use '../../base/mixins' as m;
+
+
+.form__submit {
+    @include m.btn(v.$blue, v.$white);
+    width: auto;
+    align-self: flex-start;
+
+    &--register,
+    &--full {
+        width: 100%;
+    }
+}

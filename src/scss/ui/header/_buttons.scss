@@ -1,0 +1,32 @@
+@use '../../base/variables' as v;
+@use '../../base/mixins' as m;
+
+
+.header__submit {
+    @include m.link;
+}
+
+.header__btn {
+    @include m.btn(v.$secondary, v.$white);
+    text-transform: uppercase;
+    margin: 2rem 0;
+
+    @include m.tablet {
+        width: auto;
+    }
+}
+
+.language-selector {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    &__button {
+        @include m.link;
+        padding: 0;
+
+        &--active {
+            color: v.$blue;
+        }
+    }
+}

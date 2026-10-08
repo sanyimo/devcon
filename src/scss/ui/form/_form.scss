@@ -84,15 +84,4 @@
     &__listing {
         @include m.tags;
     }
-
-    &__submit {
-        @include m.btn(v.$blue, v.$white);
-        width: auto;
-        align-self: flex-start;
-
-        &--register,
-        &--full {
-            width: 100%;
-        }
-    }
 }

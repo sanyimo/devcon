@@ -8,6 +8,15 @@
     flex-direction: column;
     background-color: v.$lightGray;
 
+    
+    &__container {
+        @include m.shadow;
+        background-color: v.$white;
+        padding: 2rem;
+        border-radius: 1rem;
+        margin-top: 5rem;
+    }
+    
     &__header {
         background-color: v.$darkGray;
         padding: 2rem;
@@ -32,6 +41,9 @@
     &__form {
         display: flex;
         justify-content: center;
+
+        @extend .dashboard__container;
+        @include m.container-md;
     }
 
     &__submit--logout {
@@ -113,19 +125,6 @@
         @include m.tablet {
             width: auto;
         }
-    }
-
-    &__container {
-        @include m.shadow;
-        background-color: v.$white;
-        padding: 2rem;
-        border-radius: 1rem;
-        margin-top: 5rem;
-    }
-
-    &__form {
-        @extend .dashboard__container;
-        @include m.container-md;
     }
 
     &__graph {

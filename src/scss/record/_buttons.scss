@@ -1,0 +1,22 @@
+@use '../base/mixins' as m;
+@use '../base/variables' as v;
+
+
+.record {
+    &__delete {
+        all: unset;
+        color: v.$red;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    &__select {
+        width: 100%;
+        background-color: v.$white;
+        border: 1px solid v.$gray;
+        padding: 1rem;
+        border-radius: .5rem;
+    }
+}

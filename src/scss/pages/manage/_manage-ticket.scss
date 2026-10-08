@@ -1,0 +1,70 @@
+@use '../../base/mixins' as m;
+@use '../../base/variables' as v;
+
+
+.tickets-grid {
+    @include m.grid(1, 1rem);
+    margin: auto;
+
+    @include m.xl_desktop {
+        @include m.grid(2, 1.5rem);
+    }    
+}
+
+.ticket-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 0.5rem;
+    border-bottom: 1px solid v.$gray;
+}
+
+.ticket__actions {
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    gap: 1rem;
+    margin: 3rem auto 0;
+    width: fit-content;
+
+    form {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+
+        label {
+            font-size: larger;
+            font-weight: v.$bold;
+        }
+
+        select {
+            all: unset;
+            padding: 1.5rem;
+            border: 2px solid v.$blue;
+            border-radius: 1rem;
+
+            &:hover {
+                box-shadow: 0 0 0 2px v.$dark-blue;
+            }
+
+            &:focus-visible {
+                outline: 1px solid v.$blue;
+                outline-offset: 2px;
+                box-shadow: 0 0 0 2px v.$secondary;
+             }
+        }
+    }
+
+    .ticket__gift {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        flex:1;
+    }
+
+    .cancel-ticket {
+        flex: 1;
+        @include m.btn(v.$secondary, v.$white);
+
+    }
+}

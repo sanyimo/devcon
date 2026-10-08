@@ -1,0 +1,32 @@
+@use '../../base/mixins' as m;
+@use '../../base/variables' as v;
+
+.manage-account {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 3rem;
+    margin: 5rem auto 0;
+    width: 200%;
+    max-width: 90rem;
+    height: auto;
+    background-color: v.$lightGray;
+    border-radius: 1rem;
+    border: 3px solid rgba($color: v.$blackColor, $alpha: 0.1);
+    box-shadow: 0 0 14px rgba($color: v.$blackColor, $alpha: 0.2);
+
+    .account-details {
+        
+        padding: 3rem;
+        border: 3px solid rgba($color: v.$blackColor, $alpha: 0.1);
+        box-shadow: 0 0 14px rgba($color: v.$blackColor, $alpha: 0.2);
+
+        border-radius: 1rem;
+    }
+
+    .delete-account {
+        @include m.btn(v.$red, v.$white);
+        margin-top:2rem;
+    }
+}
