@@ -32,6 +32,10 @@
         </nav>
     </div>
 
+    <a class="back-to-top" href="#top" aria-label="<?php echo t('Arriba'); ?>">
+        <i class="fa-solid fa-arrow-up"></i>
+    </a>
+
     <p class="footer__copyright">
         DevCon
         <span class="footer__copyright--regular">

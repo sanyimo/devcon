@@ -2,6 +2,8 @@
 
 return [
     'Idioma' => 'Language',
+    'Arriba' => 'Back to top',
+    'Cerrar' => 'Close',
     'Español' => 'Spanish',
     'Inglés' => 'English',
     'Administrar' => 'Manage',
@@ -195,4 +197,14 @@ return [
     'Elige Workshops y Conferencias' => 'Choose Workshops and Conferences',
     'Ponentes / Conferenciantes' => 'Speakers / Conference speakers',
     'Conferencias y workshops' => 'Conferences and workshops',
+    'Error' => 'Error',
+    'OK' => 'OK',
+    'Máximo 10 eventos por registro' => 'Maximum 10 events per registration',
+    'No hay eventos, añade hasta 10 del lado izquierdo' => 'There are no events, add up to 10 from the left',
+    'Elige al menos un evento y un regalo' => 'Choose at least one event and a gift',
+    'Éxito!' => 'Success!',
+    'Tus conferencias se han guardado y tu registro ha sido exitoso, te esperamos en DevCon!' => 'Your conferences have been saved and your registration was successful. We look forward to seeing you at DevCon!',
+    'Ha ocurrido un error' => 'An error occurred',
+    'No hay resultados para tu búsqueda' => 'No results for your search',
+    'Centro de convenciones, Valencia' => 'Convention center, Valencia',
 ];

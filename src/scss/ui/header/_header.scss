@@ -49,6 +49,11 @@
         @include m.text-fluid(2rem, 8rem);
         @include m.text-gradient(v.$blue, v.$secondary);
         text-align: center;
+        transition: all 0.3s ease-in-out;
+
+        &:hover {
+            color: lighten($color: v.$blue, $amount: 20);
+        }
 
         @include m.tablet {
             text-align: left;

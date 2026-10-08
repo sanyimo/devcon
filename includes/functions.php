@@ -51,3 +51,12 @@ function t(string $text): string {
 
     return $translations[$text] ?? $text;
 }
+
+function translationsForJs(): string {
+    global $translations;
+
+    return json_encode(
+        currentLanguage() === 'en' ? $translations : [],
+        JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_THROW_ON_ERROR
+    );
+}

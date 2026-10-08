@@ -21,7 +21,7 @@
 
                 const id = inputHiddenHour.value;
 
-                // Resaltar la hora actual
+                // Highlight the current hour
                 const selectedHour = document.querySelector(`[data-hour-id="${id}"]`)
                 selectedHour.classList.remove('hours__hour--disabled')
                 selectedHour.classList.add('hours__hour--selected')
@@ -33,7 +33,7 @@
         function searchTerm(e) {
             searching[e.target.name] = e.target.value;
             
-            // Reiniciar los campos ocultos y el selector de horas
+            // Reset hidden fields and the hour selector
             inputHiddenHour.value = '';
             inputHiddenDay.value = '';
             
@@ -57,10 +57,10 @@
         }
 
         function getAvailableHours(events) {
-            // Reiniciar las horas
+            // Reset the hours
             const hoursList = document.querySelectorAll('#hours li');
             hoursList.forEach(li => li.classList.add('hours__hour--disabled'))
-            // Comprobar events ya tomados, y quitar la variable de deshabilitado
+            // Check occupied events and remove the disabled state
             const hoursOccupied = events.map(event => event.hour_id);            
             const hoursListArray = Array.from(hoursList);
 
@@ -73,18 +73,18 @@
         }
 
         function selectHour(e) {
-            // Deshabilitar la hora previa, si hay un nuevo click
+            // Disable the previous hour when a new one is selected
             const prevHour = document.querySelector('.hours__hour--selected')
             if (prevHour) {
                 prevHour.classList.remove('hours__hour--selected')
             }
 
-            // Agregar clase de seleccionado
+            // Add the selected class
             e.target.classList.add('hours__hour--selected')
 
             inputHiddenHour.value = e.target.dataset.hourId
 
-            // Llenar el campo oculto de dia
+            // Fill the hidden day field
             inputHiddenDay.value = document.querySelector('[name="day"]:checked').value
         }
     }

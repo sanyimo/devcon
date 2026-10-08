@@ -23,6 +23,9 @@
     <script>
         AOS.init({});
     </script>
+    <script>
+        window.devconTranslations = <?php echo translationsForJs(); ?>;
+    </script>
     <script src="/build/js/main.min.js" defer></script>
 </body>
 </html>

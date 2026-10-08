@@ -6,3 +6,6 @@ import './map';
 import './record';
 import './gifts';
 import './language';
+import './backToTop';
+
+import './eventModal';

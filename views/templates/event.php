@@ -1,4 +1,4 @@
-<div class="event swiper-slide">
+<div class="event swiper-slide" tabindex="0">
     <p class="event__hour"><?php echo $event->hour->hour; ?></p>
     <div class="event__information">
         <h4 class="event__name"><?php echo $event->name; ?></h4>

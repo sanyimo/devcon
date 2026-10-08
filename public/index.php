@@ -72,11 +72,11 @@ $router->post('/admin/gifts/edit', [GiftsController::class, 'edit']);
 $router->post('/admin/gifts/delete', [GiftsController::class, 'delete']);
 
 // User registration
-$router->get('/finish-record', [RecordController::class, 'create']);
-$router->post('/finish-record/free', [RecordController::class, 'free']);
-$router->post('/finish-record/purchase', [RecordController::class, 'purchase']);
-$router->get('/finish-record/conferences', [RecordController::class, 'conferences']);
-$router->post('/finish-record/conferences', [RecordController::class, 'conferences']);
+$router->get('/finish-registration', [RecordController::class, 'create']);
+$router->post('/finish-registration/free', [RecordController::class, 'free']);
+$router->post('/finish-registration/purchase', [RecordController::class, 'purchase']);
+$router->get('/finish-registration/conferences', [RecordController::class, 'conferences']);
+$router->post('/finish-registration/conferences', [RecordController::class, 'conferences']);
 
 // Virtual ticket
 $router->get('/ticket', [RecordController::class, 'ticket']);

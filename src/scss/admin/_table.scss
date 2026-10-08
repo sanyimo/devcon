@@ -36,6 +36,11 @@
         text-transform: uppercase;
         font-size: 1.4rem;
         font-weight: v.$bold;
+        transition: transform 0.2s ease-in-out;
+
+        &:hover {
+            transform: scaleX(1.2);
+        }
 
         &--edit {
             color: v.$blue;

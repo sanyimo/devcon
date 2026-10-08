@@ -8,7 +8,7 @@
             const result = await response.json()
 
             const ctx = document.getElementById('gifts-graph').getContext('2d');
-            const myChart = new Chart(ctx, {
+            new Chart(ctx, {
                 type: 'bar',
                 data: {
                     labels: result.map(gift => gift.name),

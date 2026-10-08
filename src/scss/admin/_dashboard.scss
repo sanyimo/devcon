@@ -36,8 +36,10 @@
 
     &__submit--logout {
         @include m.link;
-        color: v.$gray;
-        padding: 2rem;
+        background: linear-gradient(to right bottom, v.$white, v.$gray);
+        background-clip: text;
+        -webkit-background-clip: text;
+        color: transparent;
     }
 
     &__grid {

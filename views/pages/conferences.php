@@ -57,3 +57,12 @@
         </div>
     </div>
 </main>
+
+<div class="event-modal" aria-hidden="true">
+    <div class="event-modal__content" role="dialog" aria-modal="true">
+        <button class="event-modal__close" type="button" aria-label="<?php echo t('Cerrar'); ?>">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div class="event-modal__body"></div>
+    </div>
+</div>

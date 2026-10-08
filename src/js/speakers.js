@@ -1,3 +1,5 @@
+import { t } from './i18n';
+
 (function () {
     const speakersInput = document.querySelector('#speakers');
 
@@ -16,7 +18,7 @@
                 const speaker = await getSpeaker(speakerHidden.value)
                 const { name, surname } = speaker
  
-                // Insertar en el HTML
+                // Insert into the HTML
                 const speakerDOM = document.createElement('LI');
                 speakerDOM.classList.add('listing-speakers__speaker', 'listing-speakers__speaker--selected');
                 speakerDOM.textContent = `${name} ${surname}`
@@ -54,7 +56,7 @@
             if (search.length > 3) {
                 const expression = new RegExp(search, "i");
                 filteredSpeakers = speakers.filter(speaker => {
-                    if (speaker.name.toLowerCase().search(expression) != -1) {//-1-no lo encuentra, 0 sí
+                    if (speaker.name.toLowerCase().search(expression) != -1) {// -1 means not found, 0 means found
                         return speaker
                     }
                 })
@@ -65,7 +67,7 @@
         }
         function showSpeakers() {
 
-            while (speakersList.firstChild) {//mejor performance que innerHTML
+            while (speakersList.firstChild) {// Better performance than innerHTML
                 speakersList.removeChild(speakersList.firstChild)
             }
 
@@ -77,20 +79,20 @@
                     speakerHTML.dataset.speakerId = speaker.id
                     speakerHTML.onclick = selectSpeaker
 
-                    // Añadir al dom
+                    // Add to the DOM
                     speakersList.appendChild(speakerHTML)
                 })
             } else {
                 const noResults = document.createElement('P')
                 noResults.classList.add('listing-speakers__no-result')
-                noResults.textContent = 'No hay resultados para tu búsqueda'
+                noResults.textContent = t('No hay resultados para tu búsqueda')
                 speakersList.appendChild(noResults)
             }
         }
         function selectSpeaker(e) {
             const speaker = e.target;
 
-            // Remover la clase previa
+            // Remove the previous class
             const speakerPrev = document.querySelector('.listing-speakers__speaker--selected')
             if (speakerPrev) {
                 speakerPrev.classList.remove('listing-speakers__speaker--selected')

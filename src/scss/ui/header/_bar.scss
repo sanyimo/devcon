@@ -20,5 +20,12 @@
     &__logo {
         @include m.logo;
         @include m.text-fluid(1rem, 3rem);
+
+        transition: all 0.3s ease-in-out;
+
+        &:hover {
+            transform: scale(1.2);
+            color: lighten($color: v.$blue, $amount: 40);
+        }
     }
 }

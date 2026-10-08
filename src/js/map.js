@@ -1,3 +1,5 @@
+import { t } from './i18n';
+
 if (document.querySelector('#map')) { 
     const lat = 39.456446 
     const lng = -0.355252
@@ -11,6 +13,6 @@ if (document.querySelector('#map')) {
 
     L.marker([lat, lng]).addTo(map)
         .bindPopup(`<h2 class="map__heading">DevCon</h2>
-        <p class="map__text">Centro de convenciones, Valencia</p>`)
+        <p class="map__text">${t('Centro de convenciones, Valencia')}</p>`)
         .openPopup();
 }

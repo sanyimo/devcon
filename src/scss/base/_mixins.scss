@@ -109,6 +109,11 @@
 @mixin menu-social($color, $size) {
 
     &__link {
+        &:hover::before {
+            color: v.$dark-blue;
+            transform: scale(1.5);
+        }
+
         &::before {
             color: $color;
             font-size: $size;
@@ -117,6 +122,8 @@
             text-rendering: auto;
             -webkit-font-smoothing: antialiased;
             font-family: "Font Awesome 6 Brands";
+            padding: 1rem;
+            transition: color 0.2s ease, transform 0.2s ease;
         }
 
         &[href*="facebook.com"]::before {
