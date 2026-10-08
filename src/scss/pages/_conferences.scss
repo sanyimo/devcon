@@ -1,0 +1,108 @@
+@use '../base/mixins' as m;
+@use '../base/variables' as v;
+
+
+.agenda {
+    padding: 5rem 0;
+    @include m.container;
+}
+
+.events {
+    $modificator: &;
+
+    &__heading {
+        color: v.$blue;
+        margin: 5rem 0;
+        text-align: left;
+        font-size: clamp(2rem, -0.8rem + 8vw,  6rem);
+    }
+
+    &__date {
+        color: v.$gray;
+        margin: 3rem 0 1rem 0;
+    }
+
+    &--workshops {
+        #{$modificator}__heading {//interpolacion //# - indicador d q va a ser mezcla entre variable y string
+            color: v.$secondary;
+        }
+
+        .event__information {
+            background-color: v.$secondary;
+
+            &:hover {
+                background-color: darken(v.$secondary, 10%);
+            }
+        }
+    }
+
+    .swiper-button-next, 
+    .swiper-button-prev {
+        color: rgba(v.$white, .5);
+    }
+}
+
+.event {
+    &__hour {
+        font-weight: v.$bold;
+    }
+
+    &__information {
+        padding: 2rem;
+        border-radius: 1rem;
+        background-color: v.$blue;
+        color: v.$white;
+        transition: 300ms background-color ease;
+
+        &:hover {
+            background-color: darken(v.$blue, 10%);
+        }
+    }
+
+    &__name {
+        font-size: 2rem;
+        margin: 0;
+        display: -webkit-box;
+        line-clamp: 1;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    &__introduction {
+        font-size: 1.6rem;
+        display: -webkit-box;
+        line-clamp: 6;
+        -webkit-line-clamp: 6;
+        -webkit-box-orient: vertical;
+        overflow-y: auto;
+        scrollbar-width: none;
+    }
+
+    &__autor-info {
+        display: flex;
+        gap: 2rem;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &__image-autor {
+        width: 5rem;
+        background-color: v.$white;
+        border-radius: 50%;
+    }
+
+    &__autor-name {
+        font-weight: v.$bold;
+    }
+
+    &__add {
+        @include m.btn(v.$white, v.$blackColor);
+        margin-top: 1rem;
+
+        &:disabled {
+            opacity: .5;
+            cursor: not-allowed;
+        }
+    }
+}

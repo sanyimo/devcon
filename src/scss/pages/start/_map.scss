@@ -1,0 +1,22 @@
+@use '../../base/mixins' as m;
+
+.map {
+    height: 45rem;
+    max-width: 100vw;
+    margin-top: 5rem;
+
+    @include m.desktop {
+        width: 120rem;
+        margin: 5rem auto;
+    }
+
+    &__heading {
+        margin: 0;
+        text-align: left;
+    }
+    
+    &__text {
+        font-size: 1.8rem;
+        margin: 0;
+    }
+}

@@ -1,0 +1,63 @@
+@use '../../base/mixins' as m;
+@use '../../base/variables' as v;
+
+
+.speakers__grid {
+    @include m.container;        
+    @include m.grid(1, 5rem);
+
+    @include m.tablet {
+        @include m.grid(2, 5rem);
+    }
+
+    @include m.xl_desktop {
+        @include m.grid(3, 5rem);
+    }
+}
+
+.speaker {
+    @include m.card;
+    background-position: center top;
+    background-size: 350px;
+    background-repeat: no-repeat;
+    padding: 2rem;
+
+    @for $i from 1 through 4 {
+        &:nth-child(4n + #{$i}) {
+            background-image: image-set(
+                url('../img/bg_#{$i}.avif') 1x,
+                url('../img/bg_#{$i}.webp') 1x,
+                url('../img/bg_#{$i}.png') 1x
+            );
+        }
+    }
+
+    &__image {//bg#{$i}
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+
+        @include m.tablet {
+            min-width: unset;
+            min-height: 287px;
+        }
+    }
+
+    &__location {
+        color: v.$gray;
+        margin: 1rem 0;
+        font-size: 2rem;
+        line-height: 1.5;
+    }
+    
+    &__listing-skills {
+        @include m.tags;
+    }
+}
+
+.speaker-socials {
+    @include m.menu-social(v.$blackColor, 3rem);
+    display: flex;
+    gap: 2rem;
+    margin-top: 2rem;
+}
