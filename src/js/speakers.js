@@ -65,6 +65,7 @@ import { t } from './i18n';
             }
             showSpeakers();
         }
+
         function showSpeakers() {
 
             while (speakersList.firstChild) {// Better performance than innerHTML
@@ -89,6 +90,7 @@ import { t } from './i18n';
                 speakersList.appendChild(noResults)
             }
         }
+        
         function selectSpeaker(e) {
             const speaker = e.target;
 

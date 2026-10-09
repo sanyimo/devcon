@@ -93,7 +93,7 @@ class SpeakersController {
         
         $router->render('admin/speakers/create', [
             'title' => t('Registrar ponente'),
-            'aleras' => $alerts,
+            'alerts' => $alerts,
             'speaker' => $speaker,
             'social_networks' => json_decode($speaker->social_networks)
         ]);

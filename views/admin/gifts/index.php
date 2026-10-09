@@ -1,3 +1,7 @@
+<?php
+$eventLanguage = currentLanguage();
+?>
+
 <h2 class="dashboard__heading"><?php echo t($title ?? 'Regalos'); ?></h2>
 
 <div class="dashboard__graph">
@@ -17,9 +21,9 @@
             <thead class="table__thead">
                 <tr>
                     <th scope="col" class="table__th"><?php echo t('Regalo'); ?></th>
-                    <th scope="col" class="table__th"><?php echo t('Total'); ?></th>
-                    <th scope="col" class="table__th"><?php echo t('Ya distribuidos'); ?></th>
+                    <th scope="col" class="table__th"><?php echo t('Distribuidos'); ?></th>
                     <th scope="col" class="table__th"><?php echo t('Restantes'); ?></th>
+                    <th scope="col" class="table__th"><?php echo t('Total'); ?></th>
                     <th scope="col" class="table__th"></th>
                 </tr>
             </thead>
@@ -28,16 +32,16 @@
                 <?php foreach ($gifts as $gift) { ?>
                     <tr class="table__tr">
                         <td class="table__td">
-                            <?php echo $gift->name; ?>
-                        </td>
-                        <td class="table__td">
-                            <?php echo $gift->quantity; ?>
+                            <?php echo $eventLanguage === 'en' && $gift->name_en ? $gift->name_en : $gift->name_es; ?>
                         </td>
                         <td class="table__td">
                             <?php echo $gift->reserved; ?>
                         </td>
                         <td class="table__td">
                             <?php echo $gift->availables; ?>
+                        </td>
+                        <td class="table__td">
+                            <?php echo $gift->quantity; ?>
                         </td>
 
                         <td class="table__td--actions">

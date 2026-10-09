@@ -1,3 +1,7 @@
+<?php
+$eventLanguage = currentLanguage();
+?>
+
 <h2 class="dashboard__heading"><?php echo t($title ?? ''); ?></h2>
 
 <main class="blocks">
@@ -5,14 +9,19 @@
         <div class="block">
             <h3 class="block__heading"><?php echo t('Últimos registros'); ?></h3>
 
-            <?php foreach(($records ?? []) as $record) { ?>
+            <?php foreach (($records ?? []) as $index => $record) { ?>
                 <div class="block__content">
                     <p class="block__text">
                         <?php
-                        $user = is_object($record) ? ($record->user ?? null) : null;
-                        echo is_object($user)
-                            ? htmlspecialchars(($user->name ?? '') . ' ' . ($user->surname ?? ''), ENT_QUOTES, 'UTF-8')
-                            : '';
+                        $user = $users[$index] ?? null;
+
+                        if ($user) {
+                            echo htmlspecialchars(
+                                $user->name . ' ' . $user->surname,
+                                ENT_QUOTES,
+                                'UTF-8'
+                            );
+                        }
                         ?>
                     </p>
                 </div>
@@ -26,10 +35,18 @@
 
         <div class="block">
             <h3 class="block__heading"><?php echo t('Eventos con menos cupos disponibles'); ?></h3>
-            <?php foreach(($less_availables ?? []) as $event) { ?>
+            <?php foreach (($less_availables ?? []) as $event) { ?>
                 <div class="block__content">
                     <p class="block__text">
-                        <?php if (is_object($event)) { echo htmlspecialchars($event->name ?? '', ENT_QUOTES, 'UTF-8') . ' - <strong>' . htmlspecialchars((string) ($event->availables ?? ''), ENT_QUOTES, 'UTF-8') . ' ' . t('Disponibles') . '</strong>'; } ?>
+                        <?php if (is_object($event)) {
+                            echo '<span class="block__name">' . htmlspecialchars(
+                                ($eventLanguage === 'en' && $event->name_en)
+                                    ? $event->name_en
+                                    : $event->name_es,
+                                ENT_QUOTES,
+                                'UTF-8'
+                            ) . '</span> ➤ <strong>' . htmlspecialchars((string) ($event->availables ?? ''), ENT_QUOTES, 'UTF-8') . ' ' . t('Disponibles') . '</strong>';
+                        } ?>
                     </p>
                 </div>
             <?php } ?>
@@ -37,10 +54,18 @@
 
         <div class="block">
             <h3 class="block__heading"><?php echo t('Eventos con más cupos disponibles'); ?></h3>
-            <?php foreach(($more_availables ?? []) as $event) { ?>
+            <?php foreach (($more_availables ?? []) as $event) { ?>
                 <div class="block__content">
                     <p class="block__text">
-                        <?php if (is_object($event)) { echo htmlspecialchars($event->name ?? '', ENT_QUOTES, 'UTF-8') . ' - <strong>' . htmlspecialchars((string) ($event->availables ?? ''), ENT_QUOTES, 'UTF-8') . ' ' . t('Disponibles') . '</strong>'; } ?>
+                        <?php if (is_object($event)) {
+                            echo '<span class="block__name">' . htmlspecialchars(
+                                ($eventLanguage === 'en' && $event->name_en)
+                                    ? $event->name_en
+                                    : $event->name_es,
+                                ENT_QUOTES,
+                                'UTF-8'
+                            ) . '</span> ➤ <strong>' . htmlspecialchars((string) ($event->availables ?? ''), ENT_QUOTES, 'UTF-8') . ' ' . t('Disponibles') . '</strong>';
+                        } ?>
                     </p>
                 </div>
             <?php } ?>

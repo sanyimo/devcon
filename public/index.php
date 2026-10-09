@@ -80,7 +80,7 @@ $router->post('/purchase/conferences', [RecordController::class, 'conferences'])
 
 // Account management
 $router->get('/manage', [RecordController::class, 'manage']);
-$router->post('/deregister', [AuthController::class, 'deregister']);
+$router->post('/unregister', [AuthController::class, 'unregister']);
 $router->post('/cancel-ticket', [RecordController::class, 'cancel']);
 $router->post('/manage/gift', [RecordController::class, 'updateGift']);
 

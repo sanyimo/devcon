@@ -1,25 +1,53 @@
+<?php
+$eventNameEs = isset($event) && is_object($event) ? ($event->name_es ?? '') : '';
+$eventNameEn = isset($event) && is_object($event) ? ($event->name_en ?? '') : '';
+$eventDescriptionEs = isset($event) && is_object($event) ? ($event->description_es ?? '') : '';
+$eventDescriptionEn = isset($event) && is_object($event) ? ($event->description_en ?? '') : '';
+?>
+
 <fieldset class="form__fieldset">
     <legend class="form__legend"><?php echo t('Información evento'); ?></legend>
 
     <div class="form__field">
-        <label for="name" class="form__label"><?php echo t('Nombre evento'); ?></label>
+        <label for="name_es" class="form__label"><?php echo t('Nombre evento'); ?> (ES)</label>
         <input
             type="text"
             class="form__input"
-            id="name"
-            name="name"
-            placeholder="<?php echo t('Nombre evento'); ?>"
-            value="<?php echo isset($event) ? $event->name : ''; ?>">
+            id="name_es"
+            name="name_es"
+            placeholder="<?php echo t('Nombre evento en español'); ?>"
+            value="<?php echo $eventNameEs; ?>">
     </div>
 
     <div class="form__field">
-        <label for="description" class="form__label"><?php echo t('Descripción'); ?></label>
+        <label for="name_en" class="form__label"><?php echo t('Nombre evento'); ?> (EN)</label>
+        <input
+            type="text"
+            class="form__input"
+            id="name_en"
+            name="name_en"
+            placeholder="<?php echo t('Nombre evento en inglés'); ?>"
+            value="<?php echo $eventNameEn; ?>">
+    </div>
+
+    <div class="form__field">
+        <label for="description_es" class="form__label"><?php echo t('Descripción'); ?> (ES)</label>
         <textarea
             class="form__input"
-            id="description"
-            name="description"
-            placeholder="<?php echo t('Descripción evento'); ?>"
-            rows="8"><?php echo isset($event) ? $event->description : ''; ?></textarea>
+            id="description_es"
+            name="description_es"
+            placeholder="<?php echo t('Descripción evento en español'); ?>"
+            rows="8"><?php echo $eventDescriptionEs; ?></textarea>
+    </div>
+
+    <div class="form__field">
+        <label for="description_en" class="form__label"><?php echo t('Descripción'); ?> (EN)</label>
+        <textarea
+            class="form__input"
+            id="description_en"
+            name="description_en"
+            placeholder="<?php echo t('Descripción evento en inglés'); ?>"
+            rows="8"><?php echo $eventDescriptionEn; ?></textarea>
     </div>
 
     <div class="form__field">
@@ -36,7 +64,7 @@
                 <option
                     value="<?php echo $category->id; ?>"
                     <?php echo (isset($event) && is_object($event) && isset($event->category_id) && (int) $event->category_id === (int) $category->id) ? 'selected' : ''; ?>>
-                    <?php echo $category->name; ?>
+                    <?php echo t($category->name); ?>
                 </option>
             <?php } ?>
         </select>
@@ -51,7 +79,7 @@
                     continue;
                 } ?>
                 <div>
-                    <label for="<?php echo strtolower($day->name); ?>"><?php echo $day->name; ?></label>
+                    <label for="<?php echo strtolower($day->name); ?>"><?php echo t($day->name); ?></label>
                     <input
                         type="radio"
                         id="<?php echo strtolower($day->name); ?>"

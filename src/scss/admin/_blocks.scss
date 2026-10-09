@@ -45,7 +45,7 @@
     }
 
     &__text {
-        margin: 1rem 0;
+        margin: 1rem 0;        
 
         &--quantity {
             margin-top: 5rem;
@@ -53,5 +53,14 @@
             font-size: 6rem;
             text-align: center;
         }
+    }
+
+    &__name {
+        display: inline-block;
+        max-width: 180px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        vertical-align: bottom;
     }
 }

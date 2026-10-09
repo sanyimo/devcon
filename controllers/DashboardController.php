@@ -12,11 +12,11 @@ class DashboardController {
     public static function index(Router $router) {
 
         // Get the latest registrations
-        $records = Record::get(5);
-        foreach($records as $record) {
+        $records = Record::get(4);
+        foreach ($records as $index => $record) {
             // Store the related user in a separate collection to avoid assigning
             // an undeclared property on the ActiveRecord model.
-            $users[$record->id] = User::find($record->user_id);
+            $users[$index] = User::find($record->user_id);
         }
 
         // Calculate the revenue
@@ -26,8 +26,8 @@ class DashboardController {
         $income = ($virtuals * 46.98) + ($presentials * 191.88); // PayPal commission deducted
 
         // Get events with the most and fewest available spots
-        $less_availables = Event::orderLimit('availables', 'ASC', 5);
-        $more_availables = Event::orderLimit('availables', 'DESC', 5);
+        $less_availables = Event::orderLimit('availables', 'ASC', 4);
+        $more_availables = Event::orderLimit('availables', 'DESC', 4);
 
         $router->render('admin/dashboard/index', [
             'title' => t('Panel de administración'),

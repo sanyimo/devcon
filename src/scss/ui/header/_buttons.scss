@@ -26,7 +26,7 @@
         padding: 0;
 
         &--active {
-            color: v.$blue;
+            color: lighten(v.$blue, 20);
         }
     }
 }

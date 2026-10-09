@@ -195,7 +195,8 @@
         color: v.$white;
 
         &:hover {
-            cursor:context-menu;
+            cursor:pointer;
+            background-color: darken(v.$blue, 10);
         }
     }
 }

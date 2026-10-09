@@ -89,9 +89,16 @@ class RecordController {
             $record->pack = Pack::find($record->pack_id);
         }
 
+        $gifts = Gift::all('ASC');
+
+        foreach($gifts as $gift) {
+            $gift->availables = (int) $gift->quantity - Gift::reservations($gift->id);
+        }
+
         $router->render('record/manage', [
             'title' => t('Administrar'),
-            'records' => $records
+            'records' => $records,
+            'gifts' => $gifts
         ]);
     }
 
@@ -244,9 +251,6 @@ class RecordController {
             : Record::where('user_id', $user_id);
 
         if(!$record || (string) $record->user_id !== (string) $user_id || $record->pack_id !== "1") {
-            header('Location: /');
-            return;
-        }
             header('Location: /');
             return;
         }

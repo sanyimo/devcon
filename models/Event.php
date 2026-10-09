@@ -3,11 +3,13 @@ namespace Model;
 
 class Event extends ActiveRecord {
     protected static $tabla = 'events';
-    protected static $columnsDB = ['id', 'name', 'description', 'availables', 'category_id', 'day_id', 'hour_id', 'speaker_id'];
+    protected static $columnsDB = ['id', 'name_es', 'name_en', 'description_es', 'description_en', 'availables', 'category_id', 'day_id', 'hour_id', 'speaker_id'];
 
     public mixed $id;
-    public mixed $name;
-    public mixed $description;
+    public mixed $name_es;
+    public mixed $name_en;
+    public mixed $description_es;
+    public mixed $description_en;
     public mixed $availables;
     public mixed $category_id;
     public mixed $day_id;
@@ -17,8 +19,10 @@ class Event extends ActiveRecord {
     public function __construct($args = [])
     {
         $this->id = $args['id'] ?? null;
-        $this->name = $args['name'] ?? '';
-        $this->description = $args['description'] ?? '';
+        $this->name_es = $args['name_es'] ?? '';
+        $this->name_en = $args['name_en'] ?? '';
+        $this->description_es = $args['description_es'] ?? '';
+        $this->description_en = $args['description_en'] ?? '';
         $this->availables = $args['availables'] ?? '';
         $this->category_id = $args['category_id'] ?? '';
         $this->day_id = $args['day_id'] ?? '';
@@ -28,11 +32,17 @@ class Event extends ActiveRecord {
 
     // Validation messages for event creation
     public function validate() {
-        if(!$this->name) {
-            self::$alerts['error'][] = t('El nombre es obligatorio');
+        if(!$this->name_es) {
+            self::$alerts['error'][] = t('El nombre en español es obligatorio');
         }
-        if(!$this->description) {
-            self::$alerts['error'][] = t('La descripción es obligatoria');
+        if(!$this->name_en) {
+            self::$alerts['error'][] = t('El nombre en inglés es obligatorio');
+        }
+        if(!$this->description_es) {
+            self::$alerts['error'][] = t('La descripción en español es obligatoria');
+        }
+        if(!$this->description_en) {
+            self::$alerts['error'][] = t('La descripción en inglés es obligatoria');
         }
         if(!$this->category_id  || !filter_var($this->category_id, FILTER_VALIDATE_INT)) {
             self::$alerts['error'][] = t('Elige una categoría');

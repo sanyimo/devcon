@@ -47,8 +47,10 @@
             <select id="gift" class="record__select">
                 <option value="">--<?php echo t('Elige'); ?>--</option>
                 <?php foreach (($gifts ?? []) as $gift) { ?>
-                    <?php if (is_object($gift) && isset($gift->id, $gift->name)) { ?>
-                        <option value="<?php echo $gift->id; ?>"><?php echo $gift->name; ?></option>
+                    <?php if (is_object($gift) && isset($gift->id, $gift->name_es, $gift->name_en)) { ?>
+                        <option value="<?php echo $gift->id; ?>">
+                            <?php echo $eventLanguage === 'en' && $gift->name_en ? $gift->name_en : $gift->name_es; ?>
+                        </option>
                     <?php } ?>
                 <?php } ?>
             </select>

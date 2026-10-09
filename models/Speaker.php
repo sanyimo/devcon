@@ -27,6 +27,8 @@ class Speaker extends ActiveRecord {
         $this->social_networks = $args['social_networks'] ?? '';
     }
     public function validate() {
+        self::$alerts = [];
+        
         if(!$this->name) {
             self::$alerts['error'][] = t('El nombre es necesario');
         }

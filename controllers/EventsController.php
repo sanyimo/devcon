@@ -33,6 +33,7 @@ class EventsController {
         foreach ($events as $i => $event) {
 
             $events[$i] = (object) array_merge($event->attributes(), [
+                'id' => $event->id,
                 'category' => Category::find($event->category_id),
                 'day' => Day::find($event->day_id),
                 'hour' => Hour::find($event->hour_id),

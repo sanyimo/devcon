@@ -9,7 +9,7 @@
 
 <div class="dashboard__form">
     <?php
-    include_once __DIR__ . '/../../templates/alerts.php';
+    include_once __DIR__ . './../../templates/alerts.php';
     ?>
 
     <form method="POST" action="/admin/gifts/create" class="form">

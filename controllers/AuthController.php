@@ -66,7 +66,7 @@ class AuthController {
        
     }
 
-    public static function deregister() {
+    public static function unregister() {
         if($_SERVER['REQUEST_METHOD'] !== 'POST' || !is_auth()) {
             header('Location: /');
             return;

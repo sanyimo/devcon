@@ -1,6 +1,10 @@
+<?php
+$eventLanguage = currentLanguage();
+?>
+
 <h2 class="dashboard__heading"><?php echo t($title ?? 'Eventos'); ?></h2>
 
-<div class="dashboard__container-btn
+<div class="dashboard__container-btn">
     <a class=" dashboard__btn" href="/admin/events/create">
     <i class="fa-solid fa-circle-plus"></i>
     <?php echo t('Añadir evento'); ?>
@@ -25,13 +29,13 @@
                 <?php foreach ($events as $event) { ?>
                     <tr class="table__tr">
                         <td class="table__td">
-                            <?php echo $event->name; ?>
+                            <?php echo $eventLanguage === 'en' && $event->name_en ? $event->name_en : $event->name_es; ?>
                         </td>
                         <td class="table__td">
-                            <?php echo $event->category->name; ?>
+                            <?php echo t($event->category->name); ?>
                         </td>
                         <td class="table__td">
-                            <?php echo $event->day->name . ", " . $event->hour->hour; ?>
+                            <?php echo t($event->day->name) . ", " . $event->hour->hour; ?>
                         </td>
                         <td class="table__td">
                             <?php echo $event->speaker->name . " " . $event->speaker->surname; ?>

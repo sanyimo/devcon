@@ -11,7 +11,11 @@
             new Chart(ctx, {
                 type: 'bar',
                 data: {
-                    labels: result.map(gift => gift.name),
+                    labels: result.map(gift =>
+                        document.documentElement.lang === 'en' && gift.name_en
+                            ? gift.name_en
+                            : gift.name_es
+                    ),
                     datasets: [{
                         label: '',
                         data: result.map(gift => gift.total),
@@ -31,7 +35,10 @@
                 options: {
                     scales: {
                         y: {
-                            beginAtZero: true
+                            beginAtZero: true,
+                            ticks: {
+                                stepSize: 1
+                            }
                         }
                     },
                     plugins: {

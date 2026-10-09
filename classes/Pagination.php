@@ -21,30 +21,31 @@ class Pagination {
         return $total === 0 ? 1 : $total;
     }
     public function previous_page(): int|bool {
-        $anterior = $this->current_page - 1;
-        return ($anterior > 0) ? $anterior : false;
+        $previous = $this->current_page - 1;
+        return ($previous > 0) ? $previous : false;
     }
 
     public function next_page(): int|bool {
-        $siguiente = $this->current_page + 1;
-        return ($siguiente <= $this->total_pages()) ? $siguiente : false;
+        $next = $this->current_page + 1;
+        return ($next <= $this->total_pages()) ? $next : false;
     }
-    public function prev_link(): string {
+    public function prev_link(): string
+    {
         $html = '';
-        if($this->previous_page()) {
-            $html .= "<a class=\"pagination__link pagination__link--text\" href=\"?page={$this->previous_page()}\">&laquo; Anterior </a>";
+        if ($this->previous_page()) {
+            $html .= "<a class=\"pagination__link pagination__link--text\" href=\"?page={$this->previous_page()}\">&laquo; " . t('Anterior') . "</a>";
         }
         return $html;
     }
 
-    public function next_link(): string {
+    public function next_link(): string
+    {
         $html = '';
-        if($this->next_page()) {
-            $html .= "<a class=\"pagination__link pagination__link--text\" href=\"?page={$this->next_page()}\"> Siguiente &raquo;</a>";
+        if ($this->next_page()) {
+            $html .= "<a class=\"pagination__link pagination__link--text\" href=\"?page={$this->next_page()}\">" . t('Siguiente') . " &raquo;</a>";
         }
         return $html;
     }
-
     public function numbers_pages(): string {
         $html = '';
         for($i = 1; $i <= $this->total_pages(); $i++) {

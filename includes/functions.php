@@ -12,8 +12,12 @@ function s(string $html): string {
     $s = htmlspecialchars($html);
     return $s;
 }
-function current_page(string $path): bool {
-    return str_contains($_SERVER['PATH_INFO'] ?? '/', $path) ? true : false;
+
+function current_page(string $path): bool
+{
+    $currentUrl = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH) ?: '/';
+
+    return str_contains($currentUrl, '/admin' . $path);
 }
 
 function is_auth() : bool {
