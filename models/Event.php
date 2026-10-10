@@ -32,6 +32,8 @@ class Event extends ActiveRecord {
 
     // Validation messages for event creation
     public function validate() {
+        self::$alerts = [];
+        
         if(!$this->name_es) {
             self::$alerts['error'][] = t('El nombre en español es obligatorio');
         }

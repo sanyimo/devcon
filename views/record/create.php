@@ -1,3 +1,7 @@
+<div id="purchase-confirmation" role="status" aria-live="polite" hidden>
+    <?php echo t('Compra realizada correctamente. Serás redirigido en unos segundos.'); ?>
+</div>
+
 <main class="record">
     <h2 class="record__heading"><?php echo $title ?? t('Registro'); ?></h2>
     <p class="record__description"><?php echo t('Elige tu plan'); ?></p>
@@ -61,6 +65,30 @@
 
 <script>
     function initPayPalButton() {
+
+        function showPurchaseConfirmation(url) {
+            const message = document.getElementById('purchase-confirmation');
+            message.hidden = false;
+
+            message.style.cssText = `
+                position: fixed;
+                top: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                z-index: 9999;
+                padding: 20px 30px;
+                background: #198754;
+                color: white;
+                border-radius: 8px;
+                text-align: center;
+                max-width: 90%;
+            `;
+
+            window.setTimeout(() => {
+                window.location.href = url;
+            }, 3000);
+        }
+
         // In-person pass
         paypal.Buttons({
             style: {
@@ -84,16 +112,7 @@
 
             onApprove: function(data, actions) {
                 return actions.order.capture().then(function(orderData) {
-
-                    // // Full available details
-                    // console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
-
-                    // // Show a success message within this page, e.g.
-                    // const element = document.getElementById('paypal-button-container');
-                    // element.innerHTML = '';
-                    // element.innerHTML = '<h3>Gracias por tu compra!</h3>';
-
-                    // // Or go to another URL:  actions.redirect('thank_you.html');
+                    // Or go to another URL:  actions.redirect('thank_you.html');
                     const data = new window.FormData();
                     data.append('pack_id', orderData.purchase_units[0].description);
                     data.append('payment_id', orderData.purchase_units[0].payments.captures[0].id);
@@ -105,7 +124,9 @@
                         .then(response => response.json())
                         .then(result => {
                             if (result.result) {
-                                actions.redirect('/purchase/conferences?token=' + encodeURIComponent(result.token));
+                                showPurchaseConfirmation(
+                                    '/purchase/conferences?token=' + encodeURIComponent(result.token)
+                                );
                             }
                         })
                 });
@@ -138,16 +159,7 @@
 
             onApprove: function(data, actions) {
                 return actions.order.capture().then(function(orderData) {
-
-                    // // Full available details
-                    //console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
-
-                    // // Show a success message within this page, e.g.
-                    //const element = document.getElementById('paypal-button-container');
-                    //element.innerHTML = '';
-                    //element.innerHTML = '<h3>Thank you for your payment!</h3>';
-
-                    // // Or go to another URL:  actions.redirect('thank_you.html');
+                    // Or go to another URL:  actions.redirect('thank_you.html');
                     const data = new window.FormData();
                     data.append('pack_id', orderData.purchase_units[0].description);
                     data.append('pago_id', orderData.purchase_units[0].payments.captures[0].id);
@@ -159,7 +171,7 @@
                         .then(response => response.json())
                         .then(result => {
                             if (result.result) {
-                                actions.redirect('/purchase/conferences');
+                                showPurchaseConfirmation('/purchase/conferences');
                             }
                         })
                 });

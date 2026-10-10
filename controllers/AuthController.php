@@ -62,8 +62,7 @@ class AuthController {
             session_start();
             $_SESSION = [];
             header('Location: /');
-        }
-       
+        }       
     }
 
     public static function unregister() {
@@ -171,14 +170,14 @@ class AuthController {
 
 
                     // Display the alert
-                    // User::setAlert('exito', 'Hemos enviado las instrucciones a tu email');
+                    // User::setAlert('success', 'Hemos enviado las instrucciones a tu email');
 
-                    $alerts['exito'][] = t('Hemos enviado las instrucciones a tu email');
+                    $alerts['success'][] = t('Hemos enviado las instrucciones a tu email');
                 } else {
 
                     // User::setAlert('error', 'El Usuario no existe o no esta confirmado');
 
-                    $alerts['error'][] = t('El Usuario no existe o no está confirmado');
+                    $alerts['error'][] = t('El usuario no existe o no está confirmado');
                 }
             }
         }
@@ -270,10 +269,8 @@ class AuthController {
             // Save to the database
             $user->save();
 
-            User::setAlert('exito', t('Éxito, cuenta confirmada'));
-        }
-
-     
+            User::setAlert('success', t('Éxito, cuenta confirmada'));
+        }     
 
         $router->render('auth/confirm', [
             'title' => t('Confirma tu cuenta DevCon'),

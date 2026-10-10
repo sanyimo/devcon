@@ -49,16 +49,21 @@ $gifts = $gifts ?? [];
                                     <input type="hidden" name="token" value="<?php echo $record->token; ?>">
                                     <label for="gift-<?php echo $record->id; ?>"><?php echo t('Regalo'); ?></label>
                                     <select id="gift-<?php echo $record->id; ?>" name="gift_id" onchange="this.form.submit()">
-                                        <?php foreach ($gifts as $gift) { ?>
-                                            <option value="<?php echo $gift->id; ?>" <?php echo (string) $record->gift_id === (string) $gift->id ? 'selected' : ''; ?> <?php echo $gift->availables <= 0 && (string) $record->gift_id !== (string) $gift->id ? 'disabled' : ''; ?>>
-                                                <?php if (is_object($gift) && isset($gift->id, $gift->name_es, $gift->name_en)) { ?>
-                                            <option value="<?php echo $gift->id; ?>">
-                                                <?php echo $eventLanguage === 'en' && $gift->name_en ? $gift->name_en : $gift->name_es; ?>
-                                            </option>
-                                        <?php } ?>
+                                        <option value=""  <?php echo empty($record->gift_id) ? 'selected' : ''; ?>>
+                                            <?php echo t('- Seleccionar -'); ?>
                                         </option>
-                                    <?php } ?>
-                                    </select>
+
+                                        <?php foreach ($gifts as $gift) { ?>
+                                            <?php if (is_object($gift) && isset($gift->id, $gift->name_es, $gift->name_en)) { ?>
+                                                <option
+                                                    value="<?php echo $gift->id; ?>"
+                                                    <?php echo (string) $record->gift_id === (string) $gift->id ? 'selected' : ''; ?>
+                                                    <?php echo $gift->availables <= 0 && (string) $record->gift_id !== (string) $gift->id ? 'disabled' : ''; ?>>
+                                                    <?php echo $eventLanguage === 'en' && $gift->name_en ? $gift->name_en : $gift->name_es; ?>
+                                                </option>
+                                            <?php } ?>
+                                        <?php } ?>
+                                    </select>                                    
                                 </form>
                             <?php } ?>
                         </div>

@@ -4,13 +4,14 @@ namespace Classes;
 
 use PHPMailer\PHPMailer\PHPMailer;
 
-class Email {
+class Email
+{
 
     public string $email;
     public string $name;
     public string $token;
     public string $language;
-    
+
     public function __construct(string $email, string $name, string $token, string $language)
     {
         $this->email = $email;
@@ -19,21 +20,21 @@ class Email {
         $this->language = $language;
     }
 
-    public function sendConfirmation() {
-
-         // Create a new object
-         $mail = new PHPMailer();
-         $mail->isSMTP();
-         $mail->Host = $_ENV['EMAIL_HOST'];
-         $mail->SMTPAuth = true;
-         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-         $mail->Port = $_ENV['EMAIL_PORT'];
-         $mail->Username = $_ENV['EMAIL_USER'];
-         $mail->Password = $_ENV['EMAIL_PASS'];
+    public function sendConfirmation()
+    {
+        // Create a new object
+        $mail = new PHPMailer();
+        $mail->isSMTP();
+        $mail->Host = $_ENV['EMAIL_HOST'];
+        $mail->SMTPAuth = true;
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+        $mail->Port = $_ENV['EMAIL_PORT'];
+        $mail->Username = $_ENV['EMAIL_USER'];
+        $mail->Password = $_ENV['EMAIL_PASS'];
 
         $mail->setFrom($_ENV['EMAIL_USER'], 'DevCon');
-         $mail->addAddress($this->email, $this->name);
-         $mail->Subject = $this->language === 'en' ? 'Confirm your account' : 'Confirma tu Cuenta';
+        $mail->addAddress($this->email, $this->name);
+        $mail->Subject = $this->language === 'en' ? 'Confirm your account' : 'Confirma tu Cuenta';
 
         // Set HTML
         $content = '<!DOCTYPE html>';
@@ -53,13 +54,12 @@ class Email {
 
         $mail->Body = $content;
 
-         // Send the email
-         $mail->send();
-
+        // Send the email
+        $mail->send();
     }
 
-    public function sendInstructions() {
-
+    public function sendInstructions()
+    {
         // Create a new object
         $mail = new PHPMailer();
         $mail->isSMTP();
