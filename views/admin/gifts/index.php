@@ -50,7 +50,7 @@ $eventLanguage = currentLanguage();
                                 <?php echo t('Editar'); ?>
                             </a>
 
-                            <form method="POST" action="/admin/gifts/delete">
+                            <form method="POST" action="/admin/gifts/delete" data-confirm-message="<?php echo htmlspecialchars(t('Esta acción eliminará este regalo. ¿Continuar?'), ENT_QUOTES, 'UTF-8'); ?>">
                                 <input type="hidden" name="id" value="<?php echo $gift->id; ?>">
 
                                 <button class="table__action table__action--delete" type="submit">

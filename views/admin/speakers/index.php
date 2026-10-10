@@ -33,7 +33,7 @@
                                 <?php echo t('Editar'); ?>
                             </a>
 
-                            <form method="POST" action="/admin/speakers/delete" class="table__form">
+                            <form method="POST" action="/admin/speakers/delete" class="table__form" data-confirm-message="<?php echo htmlspecialchars(t('Esta acción eliminará este ponente. ¿Continuar?'), ENT_QUOTES, 'UTF-8'); ?>">
                                 <input type="hidden" name="id" value="<?php echo $speaker->id; ?>">
                                 <button class="table__action table__action--delete" type="submit">
                                     <i class="fa-solid fa-circle-xmark"></i>

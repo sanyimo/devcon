@@ -9,3 +9,4 @@ import './language';
 import './backToTop';
 
 import './eventModal';
+import './confirmAction';

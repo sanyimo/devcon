@@ -68,9 +68,9 @@ $gifts = $gifts ?? [];
                             <?php } ?>
                         </div>
 
-                        <form method="POST" action="/cancel-ticket">
+                        <form method="POST" action="/cancel-ticket" data-confirm-message="<?php echo htmlspecialchars(t('Esta acción cancelará este ticket. ¿Continuar?'), ENT_QUOTES, 'UTF-8'); ?>">
                             <input type="hidden" name="token" value="<?php echo $record->token; ?>">
-                            <button type="submit" class="cancel-ticket" onclick="return confirm('<?php echo t('Esta acción cancelará este ticket. ¿Continuar?'); ?>');">
+                            <button type="submit" class="cancel-ticket">
                                 <?php echo t('Cancelar ticket'); ?>
                             </button>
                         </form>
@@ -88,8 +88,8 @@ $gifts = $gifts ?? [];
             <p><strong><?php echo t('E-mail'); ?>:</strong> <?php echo $_SESSION['email'] ?? ''; ?></p>
         </div>
 
-        <form method="POST" action="/unregister">
-            <button type="submit" class="delete-account" onclick="return confirm('<?php echo t('Esta acción eliminará tu cuenta y tus entradas. ¿Continuar?'); ?>');">
+        <form method="POST" action="/unregister" data-confirm-message="<?php echo htmlspecialchars(t('Esta acción eliminará tu cuenta y tus entradas. ¿Continuar?'), ENT_QUOTES, 'UTF-8'); ?>">
+            <button type="submit" class="delete-account">
                 <?php echo t('Eliminar cuenta'); ?>
             </button>
         </form>
