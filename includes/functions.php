@@ -13,11 +13,19 @@ function s(string $html): string {
     return $s;
 }
 
-function current_page(string $path): bool
-{
-    $currentUrl = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH) ?: '/';
 
-    return str_contains($currentUrl, '/admin' . $path);
+function current_page(string $path): bool {
+    $currentUrl = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH) ?: '/';
+    $currentUrl = rtrim($currentUrl, '/') ?: '/';
+    $path = rtrim($path, '/') ?: '/';
+
+    if (str_starts_with($currentUrl, '/admin/') && !str_starts_with($path, '/admin/')) {
+        $path = '/admin' . $path;
+    }
+    if ($currentUrl === '/' && $path === '/devcon') {
+        return true;
+    }
+    return $currentUrl === $path;
 }
 
 function is_auth() : bool {
@@ -32,6 +40,14 @@ function is_admin() : bool {
         session_start();
     }
     return isset($_SESSION['admin']) && !empty($_SESSION['admin']);
+}
+
+function is_demo_user(): bool {
+    if (session_status() !== PHP_SESSION_ACTIVE) {
+        session_start();
+    }
+
+    return !empty($_SESSION['demo']);
 }
 
 function aos_animation() : void {

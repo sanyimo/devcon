@@ -55,7 +55,8 @@
             <a href="/devcon" class="navigation__link <?php echo current_page('/devcon') ? 'navigation__link--current' : ''; ?>"><?php echo t('Evento'); ?></a>
             <a href="/packs" class="navigation__link <?php echo current_page('/packs') ? 'navigation__link--current' : ''; ?>"><?php echo t('Paquetes'); ?></a>
             <a href="/workshops-conferences" class="navigation__link <?php echo current_page('/workshops-conferences') ? 'navigation__link--current' : ''; ?>"><?php echo t('Workshops / Conferencias'); ?></a>
-            <a href="<?php echo is_auth() ? '/purchase' : '/register'; ?>" class="navigation__link <?php echo current_page('/purchase') ? 'navigation__link--current' : ''; ?>" data-ticket-token="<?php echo $record?->token ?? ''; ?>"><?php echo t('Entradas'); ?></a>
+            <?php $ticketsPath = is_auth() ? '/purchase' : '/register'; ?>
+            <a href="<?php echo $ticketsPath; ?>" class="navigation__link <?php echo current_page($ticketsPath) ? 'navigation__link--current' : ''; ?>" data-ticket-token="<?php echo $record?->token ?? ''; ?>"><?php echo t('Entradas'); ?></a>
         </nav>
     </div>
 </div>

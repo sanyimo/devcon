@@ -21,7 +21,21 @@ class Router
     {
 
         $current_url = $_SERVER['PATH_INFO'] ?? '/';
-        $method = $_SERVER['REQUEST_METHOD'];
+        $method = $_SERVER['REQUEST_METHOD'] ?? 'GET';
+
+        if (session_status() !== PHP_SESSION_ACTIVE && isset($_COOKIE[session_name()])) {
+            session_start();
+        }
+
+        if (!empty($_SESSION['demo'])) {
+            $allowedRequest = $method === 'GET'
+                || ($method === 'POST' && $current_url === '/logout');
+
+            if (!$allowedRequest) {
+                http_response_code(403);
+                exit('Forbidden');
+            }
+        }
 
         if ($method === 'GET') {
             $fn = $this->getRoutes[$current_url] ?? null;

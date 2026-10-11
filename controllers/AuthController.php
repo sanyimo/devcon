@@ -27,12 +27,15 @@ class AuthController {
                     if( password_verify($_POST['password'], $user->password) ) {
                         
                         // Start the session
-                        session_start();    
+                        if (session_status() !== PHP_SESSION_ACTIVE) {
+                            session_start();
+                        }
                         $_SESSION['id'] = $user->id;
                         $_SESSION['name'] = $user->name;
                         $_SESSION['surname'] = $user->surname;
                         $_SESSION['email'] = $user->email;
                         $_SESSION['admin'] = $user->admin ?? null;
+                        $_SESSION['demo'] = (int) $user->admin === 2;
 
                         // Redirect
                         if($user->admin) {
@@ -59,7 +62,9 @@ class AuthController {
 
     public static function logout() {
         if($_SERVER['REQUEST_METHOD'] === 'POST') {
-            session_start();
+            if (session_status() !== PHP_SESSION_ACTIVE) {
+                session_start();
+            }
             $_SESSION = [];
             header('Location: /');
         }       
